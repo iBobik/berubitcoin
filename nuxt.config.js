@@ -36,7 +36,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '~/modules/content-gmaps',
     '@nuxt/content'
   ],
 

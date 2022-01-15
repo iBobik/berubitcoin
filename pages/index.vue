@@ -24,10 +24,10 @@
       "
     >
       <li
-        v-for="place in verifiedPlaces.concat(coinmapPlaces)"
+        v-for="place in placesInMap"
         :key="place.slug || place.coinmapId"
-        class="max-w-sm w-[70vw] p-4 bg-gray-700 snap-center"
-        :class="{}"
+        class="max-w-sm w-[70vw] p-4 bg-gray-700 snap-center outline-4 outline-gray-200"
+        :class="{ 'outline': selectedPlaceId === place.slug || selectedPlaceId === place.coinmapId }"
       >
         <NuxtLink v-if="place.slug" :to="'/' + place.slug" class="block">
           <h2>{{ place.name }}</h2>
@@ -36,20 +36,13 @@
           <h2>{{ place.name }}</h2>
         </template>
       </li>
-
-      <!-- <li
-        v-for="place in coinmapPlaces"
-        :key="place.coinmapId"
-        class="max-w-sm w-[70vw] p-4 bg-gray-700 snap-center"
-      >
-        <h2>{{ place.name }}</h2>
-      </li> -->
     </ul>
   </div>
 </template>
 
 <script>
 import coinmapPlacesLoad from '~/lib/coinmap-places'
+import gmapsPlace from '~/lib/gmaps-place'
 
 export default {
   async asyncData ({ $content, $config }) {
@@ -57,7 +50,12 @@ export default {
       location.reload()
     }
 
-    const verifiedPlaces = await $content('places').fetch()
+    let verifiedPlaces = await $content('places').fetch()
+    verifiedPlaces = await Promise.all(verifiedPlaces.map(async place => ({
+      ...place,
+      googleMaps: await gmapsPlace($config.googleCloudApiKey, place.googleMapsId)
+    })))
+
     const verifiedPlacesCoinmapIDs = verifiedPlaces.map(p => p.coinMapId).filter(p => p)
 
     return {
@@ -84,13 +82,7 @@ export default {
 
   computed: {
     placesInMap () {
-      return this.places
-    }
-  },
-
-  methods: {
-    log (val) {
-      console.log(val)
+      return this.verifiedPlaces.concat(this.coinmapPlaces)
     }
   }
 }
