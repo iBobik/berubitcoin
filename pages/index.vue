@@ -19,15 +19,16 @@
     <ul
       class="
         absolute bottom-0 left-0 right-0 z-10
-        grid grid-flow-col gap-4 pb-8 px-[15vw]
+        grid grid-flow-col gap-4 pt-1 pb-8 px-[15vw] sm:px-[calc((100vw_-_24rem)/2)]
         overflow-x-scroll snap-mandatory snap-x scroll-smooth
       "
     >
       <li
         v-for="place in placesInMap"
+        :ref="place.slug || place.coinmapId"
         :key="place.slug || place.coinmapId"
-        class="max-w-sm w-[70vw] p-4 bg-gray-700 snap-center outline-4 outline-gray-200"
-        :class="{ 'outline': selectedPlaceId === place.slug || selectedPlaceId === place.coinmapId }"
+        class="max-w-sm w-[70vw] p-4 bg-gray-700 snap-center drop-shadow-[0_0_1px_rgb(255,255,255)]"
+        :class="{ 'bg-gray-800 drop-shadow-[0_0_2px_rgb(255,255,255)]': selectedPlaceId === place.slug || selectedPlaceId === place.coinmapId }"
       >
         <NuxtLink v-if="place.slug" :to="'/' + place.slug" class="block">
           <h2>{{ place.name }}</h2>
@@ -83,6 +84,12 @@ export default {
   computed: {
     placesInMap () {
       return this.verifiedPlaces.concat(this.coinmapPlaces)
+    }
+  },
+
+  watch: {
+    selectedPlaceId (id) {
+      this.$refs[id][0].scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
   }
 }
