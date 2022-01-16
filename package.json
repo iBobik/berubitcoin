@@ -16,6 +16,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.19.3",
+    "lodash.debounce": "^4.0.8",
     "mapbox-gl": "^1.13.2",
     "nuxt": "^2.15.8",
     "v-mapbox": "^1.7.3",
