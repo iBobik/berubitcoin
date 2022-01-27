@@ -16,13 +16,37 @@
     />
 
     <PlacesScrollList :places="placesInMap" :selected-place-id.sync="selectedPlaceId">
-      <template slot-scope="{ place }">
-        <NuxtLink v-if="place.slug" :to="'/' + place.slug" class="block">
-          <h2>{{ place.name }}</h2>
-        </NuxtLink>
-        <template v-else>
-          <h2>{{ place.name }}</h2>
-        </template>
+      <template #default="{ place }">
+        <div v-if="place.photos" class="flex gap-1 overflow-x-hidden h-28">
+          <img
+            v-for="(photo, i) in place.photos"
+            :key="photo"
+            :src="photo"
+            :lazy="i ? 'lazy' : 'eager'"
+          >
+        </div>
+
+        <div class="p-4">
+          <h2 class="mb-4 truncate">{{ place.name }}</h2>
+          <div class="mt-1 text-xs text-gray-300">
+            <p class="float-right">
+              <a v-if="place.gMapsUrl" :href="place.gMapsUrl" target="bb-place">
+                Google Maps
+              </a>
+              <span v-if="place.coinmapId">
+                zdroj:
+                <a :href="`https://coinmap.org/view/#/map/${place.lonLat[1]}/${place.lonLat[0]}/18`" target="bb-place">
+                  coinmap.org
+                </a>
+              </span>
+            </p>
+            <p v-if="place.slug">
+              <img src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
+              přijímá <a href="https://www.alza.cz/lightning-network">Bitcoin LN</a>
+            </p>
+            <p v-if="place.coinmapId">neověřeno</p>
+          </div>
+        </div>
       </template>
     </PlacesScrollList>
   </div>
@@ -41,23 +65,23 @@ export default {
     let verifiedPlaces = await $content('places').fetch()
     verifiedPlaces = await Promise.all(verifiedPlaces.map(async place => ({
       ...place,
-      googleMaps: await gmapsPlace($config.googleCloudApiKey, place.googleMapsId)
+      googleMaps: await gmapsPlace($config.googleCloudApiKey, place.googleMapsID)
     })))
 
-    const verifiedPlacesCoinmapIDs = verifiedPlaces.map(p => p.coinMapId).filter(p => p)
+    const verifiedPlacesCoinmapIDs = verifiedPlaces.map(p => p.coinMapID).filter(p => p)
 
     return {
       verifiedPlaces: verifiedPlaces.map(place => ({
         name: place.name,
         slug: place.slug,
-        photo: place.googleMaps.photos[0]?.photo_reference,
-        lonLat: [place.googleMaps.geometry.location.lng, place.googleMaps.geometry.location.lat]
+        photos: place.googleMaps.photos,
+        lonLat: [place.googleMaps.geometry.location.lng, place.googleMaps.geometry.location.lat],
+        gMapsUrl: place.googleMaps.url
       })),
       coinmapPlaces: (await coinmapPlacesLoad($config.mapBounds)).map(place => ({
         coinmapId: place.id,
         name: place.name,
-        lonLat: [place.lon, place.lat],
-        website: place.website
+        lonLat: [place.lon, place.lat]
       })).filter(place => !verifiedPlacesCoinmapIDs.includes(place.coinmapId))
     }
   },
@@ -71,7 +95,11 @@ export default {
 
   computed: {
     placesInMap () {
-      return this.verifiedPlaces.concat(this.coinmapPlaces)
+      const all = this.verifiedPlaces.concat(this.coinmapPlaces)
+      if (this.currentBounds) {
+        return all.filter(place => this.currentBounds.contains(place.lonLat))
+      }
+      return all
     }
   }
 }
