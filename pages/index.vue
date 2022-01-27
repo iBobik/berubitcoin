@@ -35,7 +35,7 @@
               </a>
               <span v-if="place.coinmapId">
                 zdroj:
-                <a :href="`https://coinmap.org/view/#/map/${place.lonLat[1]}/${place.lonLat[0]}/18`" target="bb-place">
+                <a :href="`https://coinmap.org/venue/${place.coinmapId}`" target="bb-place">
                   coinmap.org
                 </a>
               </span>
