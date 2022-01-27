@@ -14,8 +14,8 @@
           v-bind="marker"
           @click="$emit('update:selectedPlaceId', marker.id)"
         >
-          <div slot="marker">
-            <img src="~assets/coinmap_marker.svg" width="10" height="10" :style="{ scale: marker.id === selectedPlaceId ? 2 : 1 }">
+          <div slot="marker" :style="{ 'z-index': marker.id === selectedPlaceId ? 10 : 1 }">
+            <img src="~assets/coinmap_marker.svg" width="10" height="10" :class="{ 'animate-breath' : marker.id === selectedPlaceId }">
           </div>
         </MglMarker>
 
@@ -26,12 +26,12 @@
           anchor="bottom"
           @click="$emit('update:selectedPlaceId', marker.id)"
         >
-          <div slot="marker">
-            <img src="~assets/ln_marker.svg" width="20" height="20" :style="{ scale: marker.id === selectedPlaceId ? 2 : 1 }">
+          <div slot="marker" :style="{ 'z-index': marker.id === selectedPlaceId ? 10 : 1 }">
+            <img src="~assets/ln_marker.svg" width="25" height="25" :class="{ 'animate-bounce' : marker.id === selectedPlaceId }">
           </div>
         </MglMarker>
 
-        <MglGeolocateControl style="margin-bottom: 10rem" position="bottom-right" :fit-bounds-options="fitBoundsOptions" />
+        <MglGeolocateControl position="bottom-right" :fit-bounds-options="fitBoundsOptions" />
       </MglMap>
     </client-only>
     <div v-if="loading" class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center">
@@ -59,14 +59,14 @@ export default {
 
   data: () => ({
     loading: true,
-    fitBoundsOptions: { padding: { top: 48, bottom: 148 } }
+    fitBoundsOptions: { padding: { top: 48, bottom: 244 } }
   }),
 
   async mounted () {
     const data = await this.$axios.$get('https://api.freegeoip.app/json/?apikey=7322d930-76e8-11ec-9e78-3715ca488a24')
     this.position = [data.longitude, data.latitude]
     if (this.map) {
-      this.map.flyTo({ center: this.position, zoom: 8 })
+      this.flyTo(this.position)
     }
   },
 
@@ -76,19 +76,26 @@ export default {
 
       this.map = map
       if (this.position) {
-        map.flyTo({ center: this.position, zoom: 10 })
+        this.flyTo(this.position)
       }
 
       map.on('moveend', () => {
         this.$emit('moveend', map.getBounds())
       })
+    },
+
+    flyTo (position) {
+      this.map.fitBounds(
+        [[position[0] + 0.17, position[1] + 0.14], [position[0] - 0.17, position[1] - 0.14]],
+        this.fitBoundsOptions
+      )
     }
   }
 }
 </script>
 
 <style scoped>
-::v-deep .mapboxgl-ctrl-group {
-  margin-bottom: 8rem;
+::v-deep .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group {
+  margin-bottom: 15rem;
 }
 </style>
