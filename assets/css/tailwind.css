@@ -4,6 +4,10 @@
 
 @layer base {
   body {
-    @apply bg-mapboxBase text-white;
+    @apply text-white bg-mapboxBase;
+  }
+
+  a {
+    @apply underline;
   }
 }

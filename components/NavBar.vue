@@ -20,7 +20,7 @@
           :key="item.to"
           :to="item.to"
           :href="item.href"
-          class="block px-4 py-2 border-b border-gray-800 hover:bg-gray-800"
+          class="block px-4 py-2 no-underline border-b border-gray-800 hover:bg-gray-800"
         >
           {{ item.text }}
         </component>
