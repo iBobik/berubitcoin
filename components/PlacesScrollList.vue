@@ -35,7 +35,7 @@ export default {
   },
 
   mounted () {
-    this.handleDebouncedScroll = debounce(this.scrollStopped, 100)
+    this.handleDebouncedScroll = debounce(this.scrollStopped, 2000)
     this.$el.addEventListener('scroll', this.handleDebouncedScroll)
     if (!this.selectedPlaceId && this.places.length) {
       this.$emit('update:selectedPlaceId', this.places[0].slug || this.places[0].coinmapId)
