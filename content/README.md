@@ -4,11 +4,12 @@ Ověřená místa se načítají z YAML aouborů v adresářo [`places`](places)
 
 ## Formát souboru
 
-- název souboru ve tvaru `mesto-nazev-mista.yml` (jen malá písmena bez diakritiky a spojovník místo mezer, bez městských částí)
+- název souboru ve tvaru `mesto-nazev-mista.yml` (jen malá písmena, bez diakritiky, spojovník místo mezer, bez městských částí)
 - `name`: Název místa, typicky stejné jako na Google Maps.
 - `googleMapsID`: ID Google Place, [dá se najít zde](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder).
 - `coinMapID`:  Pokud je místo v [Coinmap.org](https://coinmap.org/view), je nutné zadat jeho ID aby se nezobrazovalo dvakrát. Je videt v URL pod Actions -> Share venue. Pokud v Coinmap není, tak pole odstraň.
 - `maintainerGitHubLogin`: GitHub login správce tohoto místa. Měl by to být človek co je v kontaktu s majitelem, poskytuje mu pomoc a garantuje aktuálnost.
+- `solution`: Jaké řešení/aplikace se zde používá, např. Breez, BTCPay Server, Printed QR, …
 
 Můžeš použít tuto šablonu:
 ```
@@ -16,6 +17,7 @@ name:
 googleMapsID:
 coinMapID:
 maintainerGitHubLogin:
+solution:
 
 ```
 
