@@ -15,8 +15,8 @@
 <script>
 export default {
   methods: {
-    submit (ev) {
-      console.log(ev)
+    submit ({ target }) {
+      this.$axios.post('/api/subscribe', new FormData(target))
     }
   }
 }
