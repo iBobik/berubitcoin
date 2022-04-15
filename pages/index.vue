@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar />
+    <NavBar class="absolute" />
 
     <IsomorphicMap
       :coinmap-markers="coinmapPlaces.map(place => ({
