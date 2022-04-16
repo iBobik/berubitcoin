@@ -7,7 +7,7 @@
         Tvůj e-mail
         <input type="email" name="email" required>
       </label>
-      <input type="hidden" name="topics[]" value="Nová ověřená místa">
+      <input type="hidden" name="topics" value="Nová ověřená místa">
       <input type="submit" value="Přihlásit se">
     </form>
     <p v-else>
