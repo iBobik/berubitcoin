@@ -1,19 +1,23 @@
 const dooApp = 'efbaec88-cfc7-439c-856a-8a28d216730a'
 
 export async function onRequestPost ({ request, env }) {
-  const formData = await request.formData()
-  const data = await fetchDoo(
-    env.TABIDOO_JWT,
-    `apps/${dooApp}/tables/88d629e4-48fa-4cae-b86d-b81dac1078fa/data`,
-    'POST',
-    {
-      fields: {
-        email: { href: formData.get('email'), isMailto: true },
-        topics: formData.getAll('topics')
+  try {
+    const formData = await request.formData()
+    const data = await fetchDoo(
+      env.TABIDOO_JWT,
+      `apps/${dooApp}/tables/88d629e4-48fa-4cae-b86d-b81dac1078fa/data`,
+      'POST',
+      {
+        fields: {
+          email: { href: formData.get('email'), isMailto: true },
+          topics: formData.getAll('topics')
+        }
       }
-    }
-  )
-  return JSONResponse(data)
+    )
+    return JSONResponse(data)
+  } catch (err) {
+    return JSONResponse({ error: JSON.stringify(err, Object.getOwnPropertyNames(err)) })
+  }
 }
 
 async function fetchDoo (apiKey, path, method = 'GET', body = null) {
