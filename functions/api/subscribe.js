@@ -16,7 +16,7 @@ export async function onRequestPost ({ request, env }) {
     )
     return JSONResponse(data)
   } catch (err) {
-    return JSONResponse({ error: JSON.stringify(err, Object.getOwnPropertyNames(err)) })
+    return JSONResponse({ error: env.DEBUG === '1' ? JSON.stringify(err, Object.getOwnPropertyNames(err)) : true })
   }
 }
 
@@ -31,7 +31,7 @@ async function fetchDoo (apiKey, path, method = 'GET', body = null) {
   })
   const response = await fetch(request)
   if (response.status !== 200) {
-    throw new Error(`Tabidoo error: ${response.status} ${response.statusText}\n${await response.text()}`)
+    throw new Error(`Tabidoo error: ${response.status} ${response.statusText}\n${await response.text()}\nRequest: ${path}\n${JSON.stringify(body)}`)
   }
   return response.json()
 }
