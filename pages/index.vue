@@ -40,11 +40,11 @@
                 </a>
               </span>
             </p>
-            <p v-if="place.slug">
+            <p v-if="place.verified">
               <img src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
               přijímá <a href="https://www.alza.cz/lightning-network">Bitcoin LN</a>
             </p>
-            <p v-if="place.coinmapId">neověřeno</p>
+            <p v-else>neověřeno</p>
           </div>
         </div>
       </template>
@@ -55,6 +55,7 @@
 <script>
 import coinmapPlacesLoad from '~/lib/coinmap-places'
 import gmapsPlace from '~/lib/gmaps-place'
+import { fetchDoo } from '~/lib/tabidoo'
 
 export default {
   async asyncData ({ $content, $config }) {
@@ -62,10 +63,10 @@ export default {
       location.reload()
     }
 
-    let verifiedPlaces = await $content('places').fetch()
-    verifiedPlaces = await Promise.all(verifiedPlaces.map(async place => ({
-      ...place,
-      googleMaps: await gmapsPlace($config.googleCloudApiKey, place.googleMapsID)
+    let { data: verifiedPlaces } = await fetchDoo(process.env.TABIDOO_JWT, 'tables/Places/data')
+    verifiedPlaces = await Promise.all(verifiedPlaces.map(async record => ({
+      ...record.fields,
+      googleMaps: await gmapsPlace($config.googleCloudApiKey, record.fields.googleMapsID)
     })))
 
     const verifiedPlacesCoinmapIDs = verifiedPlaces.map(p => p.coinMapID).filter(p => p)
@@ -73,7 +74,7 @@ export default {
     return {
       verifiedPlaces: verifiedPlaces.map(place => ({
         name: place.name,
-        slug: place.slug,
+        verified: true,
         photos: place.googleMaps.photos,
         lonLat: [place.googleMaps.geometry.location.lng, place.googleMaps.geometry.location.lat],
         gMapsUrl: place.googleMaps.url
