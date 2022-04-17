@@ -37,8 +37,8 @@ export default {
   data: () => ({
     menuLinks: [
       { to: '/subscribe', text: 'Odebírat novinky' },
+      { to: '/add-place', text: 'Přidat podnik' },
       { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu' },
-      { href: 'https://github.com/iBobik/berubitcoin/tree/master/content', text: 'Přidat podnik' },
       { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet?' },
       { href: 'https://www.berubitcoin.cz/#kontakt', text: 'Kontakt' }
     ]
