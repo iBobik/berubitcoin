@@ -9,7 +9,8 @@ module.exports = {
         btcOrange: '#f7931a'
       },
       container: {
-        center: true
+        center: true,
+        padding: '1rem'
       },
       scale: {
         200: '2'
