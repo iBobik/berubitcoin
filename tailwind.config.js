@@ -5,7 +5,12 @@ module.exports = {
     extend: {
       colors: {
         gray: colors.neutral, // renamed to 'neutral' in v3.0
-        mapboxBase: '#343332'
+        mapboxBase: '#343332',
+        btcOrange: '#f7931a'
+      },
+      container: {
+        center: true,
+        padding: '1rem'
       },
       scale: {
         200: '2'
@@ -24,5 +29,7 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/forms')({ strategy: 'base' })
+  ]
 }

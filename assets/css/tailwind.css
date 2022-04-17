@@ -10,4 +10,16 @@
   a {
     @apply underline;
   }
+
+  input {
+    @apply block text-black;
+  }
+
+  label {
+    @apply my-4;
+  }
+
+  input[type='submit'] {
+    @apply p-2 my-4 text-white bg-btcOrange;
+  }
 }

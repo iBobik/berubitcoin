@@ -1,11 +1,14 @@
 <template>
-  <div class="absolute top-0 left-0 right-0 z-10 flex items-center h-12 place-content-between">
-    <NuxtLink to="/">
-      <h1 class="ml-2">
-        <img class="h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
-      </h1>
-    </NuxtLink>
+  <div class="top-0 right-0 z-10 flex items-center h-12 left-2 place-content-between">
+    <h1 class="grow">
+      <NuxtLink to="/">
+        <img class="inline-block h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
+      </NuxtLink>
+    </h1>
 
+    <NuxtLink to="/subscribe">
+      <img class="w-5 h-5 m-2" src="~assets/notify.svg" alt="Notifikace">
+    </NuxtLink>
     <label role="navigation" class="relative">
       <input type="checkbox" class="sr-only peer" aria-controls="menu">
       <div class="p-4 space-y-1 peer-checked:bg-gray-700">
@@ -33,7 +36,7 @@
 export default {
   data: () => ({
     menuLinks: [
-      { to: '/online-podniky', text: 'On-line podniky' },
+      { to: '/subscribe', text: 'Odebírat novinky' },
       { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu' },
       { href: 'https://github.com/iBobik/berubitcoin/tree/master/content', text: 'Přidat podnik' },
       { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet?' },
