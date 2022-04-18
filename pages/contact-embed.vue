@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen py-1">
     <div>
-      <h1 class="my-4 text-2xl">Kontaktuj nás</h1>
-      <p>Máš zájem nebo se chceš jen nezávazně zeptat?</p>
+      <h1 class="my-4 text-4xl text-center">Kontaktuj nás</h1>
+      <p class="font-medium text-center">Máš zájem nebo se chceš jen nezávazně zeptat?</p>
       <ContactForm />
     </div>
   </div>
@@ -25,7 +25,7 @@ body {
   @apply bg-white text-black;
 }
 
-input[type], textarea {
+[type=email], [type=tel], [type=text], [type=checkbox], [type=url], [type=radio], textarea {
   @apply bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 border-0 rounded;
 }
 

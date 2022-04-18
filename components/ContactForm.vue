@@ -22,7 +22,7 @@
       <input type="url" name="company" placeholder="https://maps.google.com/...">
       <small>Odkaz na místo tvého podniku</small>
     </label>
-    <div class="mt-4">
+    <div class="label mt-4">
       Píšu protože...
       <label class="my-0">
         <input v-model="intent" type="radio" name="intent" value="Chci přijímat Bitcoin" required>
@@ -50,9 +50,9 @@
         Co nabízíš?<br>
         Užijeme pomoc s propagací, webovým vývojem i víme jak smysluplně utratit peníze.
       </small>
-      <textarea name="message" required />
+      <textarea name="message" rows="8" required />
     </label>
-    <input type="submit" value="Odeslat">
+    <input type="submit" value="Odeslat zprávu">
   </form>
   <p v-else>
     Odesláno
