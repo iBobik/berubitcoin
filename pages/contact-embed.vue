@@ -38,6 +38,6 @@ small {
 }
 
 input[type=submit] {
-  @apply bg-blue-500 hover:bg-blue-600 focus:bg-blue-700;
+  @apply bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 rounded;
 }
 </style>

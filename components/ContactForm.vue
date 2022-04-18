@@ -2,7 +2,7 @@
   <form v-if="!send" @submit.prevent="submit">
     <label>
       Tvé jméno
-      <input type="text" name="name" required>
+      <input type="text" class="form-input" name="name" required>
     </label>
     <label>
       Tvůj e-mail

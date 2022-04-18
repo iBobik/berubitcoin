@@ -8,7 +8,7 @@ export async function onRequestPost ({ request, env }) {
         name: formData.get('name'),
         email: { href: formData.get('email'), isMailto: true },
         phone: formData.get('phone'),
-        signal: formData.get('signal'),
+        signal: formData.get('signal') === 'on',
         company: formData.get('company'),
         intent: formData.get('intent'),
         message: formData.get('message')
