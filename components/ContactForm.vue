@@ -40,15 +40,15 @@
     <label>
       Tvá zpráva
       <small v-if="intent === 'Chci přijímat Bitcoin'">
-        Používáte už Bitcoin nějak? Hodlujete? Zkoušeli jste něco?<br>
-        Co s vydělaným Bitcoinem pak chcete dělat? Nechávat si na spoření? Vyplácet zaměstnancům? Směnit na koruny?<br>
-        Jaká je v podniku tvá role? Jak jsou na tom s Bitcoinem ostatní?<br>
-        Jste schopni zajistit aby plaby Bitcoinem uměli všichni zaměstnanci kdykoliv?<br>
-        Proč chcete přijímat Bitcoin?
+        <p>Používáte už Bitcoin nějak? Hodlujete? Zkoušeli jste něco?</p>
+        <p>Co s vydělaným Bitcoinem pak chcete dělat? Nechávat si na spoření? Vyplácet zaměstnancům? Směnit na koruny?</p>
+        <p>Jaká je v podniku tvá role? Jak jsou na tom s Bitcoinem ostatní?</p>
+        <p>Jste schopni zajistit aby plaby Bitcoinem uměli všichni zaměstnanci kdykoliv?</p>
+        <p>Proč chcete přijímat Bitcoin?</p>
       </small>
       <small v-if="intent === 'Nabízím pomoc'">
-        Co nabízíš?<br>
-        Užijeme pomoc s propagací, webovým vývojem i víme jak smysluplně utratit peníze.
+        <p>Co nabízíš?</p>
+        <p>Užijeme pomoc s propagací, webovým vývojem i víme jak smysluplně utratit peníze.</p>
       </small>
       <textarea name="message" rows="8" required />
     </label>
@@ -84,5 +84,9 @@ label {
 
 small {
   @apply block;
+}
+
+small p {
+  @apply my-2;
 }
 </style>
