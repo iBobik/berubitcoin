@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container max-w-md">
     <NavBar />
     <h1 class="my-4 text-2xl">Zasílat nová místa</h1>
     <form v-if="!send" @submit.prevent="submit">

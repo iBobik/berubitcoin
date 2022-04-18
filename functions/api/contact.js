@@ -3,10 +3,15 @@ import { fetchDoo, JSONResponse, errorResponse } from '~/lib/tabidoo'
 export async function onRequestPost ({ request, env }) {
   try {
     const formData = await request.formData()
-    const data = await fetchDoo(env.TABIDOO_JWT, 'tables/Subscriptions/data', 'POST', {
+    const data = await fetchDoo(env.TABIDOO_JWT, 'tables/Contacts/data', 'POST', {
       fields: {
+        name: formData.get('name'),
         email: { href: formData.get('email'), isMailto: true },
-        topics: formData.getAll('topics')
+        phone: formData.get('phone'),
+        signal: formData.get('signal'),
+        company: formData.get('company'),
+        intent: formData.get('intent'),
+        message: formData.get('message')
       }
     })
     return JSONResponse(data)
