@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-items-center absolute inset-8">
+  <div class="grid place-items-center absolute inset-0 sm:inset-8 sm:bottom-20">
     <div class="p-10 rounded shadow-2xl bg-white max-w-2xl">
       <h1 class="my-4 text-4xl text-center">Kontaktuj nás</h1>
       <p class="font-medium text-center">Máš zájem nebo se chceš jen nezávazně zeptat?</p>
