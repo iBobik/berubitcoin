@@ -11,8 +11,8 @@
     @apply underline;
   }
 
-  input {
-    @apply block text-black;
+  input, textarea {
+    @apply block text-black w-full;
   }
 
   label {

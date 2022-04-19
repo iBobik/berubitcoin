@@ -1,4 +1,4 @@
-import { fetchDoo } from '~/lib/tabidoo'
+import { fetchDoo, JSONResponse, errorResponse } from '~/lib/tabidoo'
 
 export async function onRequestPost ({ request, env }) {
   try {
@@ -11,13 +11,6 @@ export async function onRequestPost ({ request, env }) {
     })
     return JSONResponse(data)
   } catch (err) {
-    return JSONResponse({ error: env.DEBUG === '1' ? JSON.stringify(err, Object.getOwnPropertyNames(err)) : true }, 500)
+    return errorResponse(err, env.DEBUG)
   }
-}
-
-function JSONResponse (data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    headers: { 'content-type': 'application/json;charset=UTF-8' },
-    status
-  })
 }

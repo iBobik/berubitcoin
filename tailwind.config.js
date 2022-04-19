@@ -30,6 +30,6 @@ module.exports = {
     extend: {}
   },
   plugins: [
-    require('@tailwindcss/forms')({ strategy: 'base' })
+    require('@tailwindcss/forms')
   ]
 }
