@@ -25,7 +25,7 @@ body {
   @apply bg-white text-black;
 }
 
-[type=email], [type=tel], [type=text], [type=checkbox], [type=url], [type=radio], textarea {
+.form-input, .form-checkbox, .form-textarea, .form-radio {
   @apply bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 border-0 rounded;
 }
 

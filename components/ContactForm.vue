@@ -2,38 +2,38 @@
   <form v-if="!send" @submit.prevent="submit">
     <label>
       Tvé jméno
-      <input type="text" class="form-input" name="name" required>
+      <input class="form-input" type="text" name="name" required>
     </label>
     <label>
       Tvůj e-mail
-      <input type="email" name="email" required>
+      <input class="form-input" type="email" name="email" required>
     </label>
     <label>
       Tvůj telefon
-      <input type="tel" name="phone" required>
+      <input class="form-input" type="tel" name="phone" required>
     </label>
     <label>
-      <input type="checkbox" name="signal">
+      <input class="form-checkbox" type="checkbox" name="signal">
       Máš Signal?
       <small>Používáš toto číslo na Signalu? To je bezpečná komunikační aplikace, která je standardem v krypto komunitě.</small>
     </label>
     <label>
       Odkaz na Google Maps
-      <input type="url" name="company" placeholder="https://maps.google.com/...">
+      <input class="form-input" type="url" name="company" placeholder="https://maps.google.com/...">
       <small>Odkaz na místo tvého podniku</small>
     </label>
     <div class="label mt-4">
       Píšu protože...
       <label class="my-0">
-        <input v-model="intent" type="radio" name="intent" value="Chci přijímat Bitcoin" required>
+        <input v-model="intent" class="form-radio" type="radio" name="intent" value="Chci přijímat Bitcoin" required>
         Chci přijímat Bitcoin
       </label>
       <label class="my-0">
-        <input v-model="intent" type="radio" name="intent" value="Nabízím pomoc">
+        <input v-model="intent" class="form-radio" type="radio" name="intent" value="Nabízím pomoc">
         Nabízím pomoc
       </label>
       <label class="my-0">
-        <input v-model="intent" type="radio" name="intent" value="Něco jiného">
+        <input v-model="intent" class="form-radio" type="radio" name="intent" value="Něco jiného">
         Něco jiného
       </label>
     </div>
@@ -50,7 +50,7 @@
         <p>Co nabízíš?</p>
         <p>Užijeme pomoc s propagací, webovým vývojem i víme jak smysluplně utratit peníze.</p>
       </small>
-      <textarea name="message" rows="8" required />
+      <textarea class="form-textarea" name="message" rows="8" required />
     </label>
     <input type="submit" value="Odeslat zprávu">
   </form>
