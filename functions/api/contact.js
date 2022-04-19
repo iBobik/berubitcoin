@@ -9,7 +9,8 @@ export async function onRequestPost ({ request, env }) {
         email: { href: formData.get('email'), isMailto: true },
         phone: formData.get('phone'),
         signal: formData.get('signal') === 'on',
-        company: { href: formData.get('company') },
+        company: formData.get('company'),
+        place: { href: formData.get('place') },
         intent: formData.get('intent'),
         message: formData.get('message')
       }

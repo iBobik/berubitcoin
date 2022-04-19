@@ -1,5 +1,5 @@
 <template>
-  <form v-if="!send" @submit.prevent="submit">
+  <form @submit.prevent="submit">
     <label>
       Tvé jméno
       <input class="form-input" type="text" name="name" required>
@@ -18,8 +18,12 @@
       <small>Používáš toto číslo na Signalu? To je bezpečná komunikační aplikace, která je standardem v krypto komunitě.</small>
     </label>
     <label>
+      Název podniku
+      <input class="form-input" type="text" name="company" required>
+    </label>
+    <label>
       Odkaz na Google Maps
-      <input class="form-input" type="url" name="company" placeholder="https://maps.google.com/...">
+      <input class="form-input" type="url" name="place" placeholder="https://maps.google.com/...">
       <small>Odkaz na místo tvého podniku</small>
     </label>
     <div class="label mt-4">
@@ -52,11 +56,11 @@
       </small>
       <textarea class="form-textarea" name="message" rows="8" required />
     </label>
-    <input type="submit" value="Odeslat zprávu">
+    <input v-if="!send" type="submit" value="Odeslat zprávu">
+    <p v-else class="p-3 text-center text-xl">
+      Odesláno
+    </p>
   </form>
-  <p v-else>
-    Odesláno
-  </p>
 </template>
 
 <script>
