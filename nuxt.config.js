@@ -57,7 +57,17 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      lang: 'cs',
+      name: 'mapa.BeruBitcoin.cz',
+      ogHost: 'https://mapa.berubitcoin.cz',
+      ogImage: '/ogimage.jpg',
+      theme_color: '#f7931a'
+    },
     manifest: {
+      name: 'mapa.BeruBitcoin.cz',
+      short_name: 'BeruBitcoin',
+      background_color: '#343332',
       lang: 'cs'
     }
   },
