@@ -63,10 +63,14 @@ export default {
   }),
 
   async mounted () {
-    const data = await this.$axios.$get('https://api.freegeoip.app/json/?apikey=7322d930-76e8-11ec-9e78-3715ca488a24')
-    this.position = [data.longitude, data.latitude]
-    if (this.map) {
-      this.flyTo(this.position)
+    try {
+      this.position = await this.$axios.$get('/api/location')
+      if (this.map) {
+        this.flyTo(this.position)
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
     }
   },
 

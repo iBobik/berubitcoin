@@ -73,6 +73,7 @@ export default {
 
     return {
       verifiedPlaces: verifiedPlaces.map(place => ({
+        slug: place.slug,
         name: place.name,
         verified: true,
         photos: place.googleMaps.photos,
