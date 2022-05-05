@@ -30,7 +30,7 @@ export default {
 
   watch: {
     selectedPlaceId (id) {
-      this.$el.querySelector(`[data-place-id='${id}']`).scrollIntoView({ behavior: 'smooth', block: 'center' })
+      this.$el.querySelector(`[data-place-id='${id}']`).scrollIntoView({ behavior: 'smooth', inline: 'center' })
     }
   },
 
