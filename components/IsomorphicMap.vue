@@ -63,9 +63,14 @@ export default {
   }),
 
   async mounted () {
-    this.position = await this.$axios.$get('/api/location')
-    if (this.map) {
-      this.flyTo(this.position)
+    try {
+      this.position = await this.$axios.$get('/api/location')
+      if (this.map) {
+        this.flyTo(this.position)
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
     }
   },
 
