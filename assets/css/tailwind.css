@@ -12,14 +12,14 @@
   }
 
   input, textarea {
-    @apply block text-black w-full;
+    @apply block w-full text-black;
   }
 
   label {
     @apply my-4;
   }
 
-  input[type='submit'] {
+  input[type='submit'], button {
     @apply p-2 my-4 text-white bg-btcOrange;
   }
 }

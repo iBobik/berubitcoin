@@ -2,6 +2,8 @@
   <div>
     <NavBar class="absolute" />
 
+    <WelcomePopup />
+
     <IsomorphicMap
       :coinmap-markers="coinmapPlaces.map(place => ({
         coordinates: place.lonLat,

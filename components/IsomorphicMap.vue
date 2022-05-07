@@ -31,7 +31,7 @@
           </div>
         </MglMarker>
 
-        <MglGeolocateControl position="bottom-right" :fit-bounds-options="fitBoundsOptions" />
+        <MglGeolocateControl position="bottom-right" :fit-bounds-options="fitBoundsOptions" track-user-location />
       </MglMap>
     </client-only>
     <div v-if="loading" class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center">
@@ -59,7 +59,7 @@ export default {
 
   data: () => ({
     loading: true,
-    fitBoundsOptions: { padding: { top: 48, bottom: 244 } }
+    fitBoundsOptions: { padding: { top: 220, bottom: 244 }, maxZoom: 13 }
   }),
 
   async mounted () {
@@ -101,5 +101,9 @@ export default {
 <style scoped>
 ::v-deep .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group {
   margin-bottom: 15rem;
+}
+
+::v-deep button {
+  margin: 0;
 }
 </style>
