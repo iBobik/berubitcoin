@@ -65,7 +65,7 @@ export default {
       location.reload()
     }
 
-    let { data: verifiedPlaces } = await fetchDoo(process.env.TABIDOO_JWT, 'tables/Places/data')
+    let { data: verifiedPlaces } = await fetchDoo(process.env.TABIDOO_JWT, 'tables/Places/data?filter=active(eq)true')
     verifiedPlaces = await Promise.all(verifiedPlaces.map(async record => ({
       ...record.fields,
       googleMaps: await gmapsPlace($config.googleCloudApiKey, record.fields.googleMapsID)
