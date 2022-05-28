@@ -19,11 +19,11 @@
     </label>
     <label>
       Název podniku
-      <input class="form-input" type="text" name="company" required>
+      <input class="form-input" type="text" name="company" :required="intent === 'Chci přijímat Bitcoin'">
     </label>
     <label>
       Odkaz na Google Maps
-      <input class="form-input" type="url" name="place" placeholder="https://maps.google.com/..." required>
+      <input class="form-input" type="url" name="place" placeholder="https://maps.google.com/..." :required="intent === 'Chci přijímat Bitcoin'">
       <small>Odkaz na místo tvého podniku</small>
     </label>
     <div class="mt-4 label">
@@ -52,7 +52,7 @@
       </small>
       <small v-if="intent === 'Nabízím pomoc'">
         <p>Co nabízíš?</p>
-        <p>Užijeme pomoc s propagací, webovým vývojem i víme jak smysluplně utratit peníze.</p>
+        <p>Užijeme pomoc s propagací, evangelizací, vývojem i víme jak smysluplně utratit peníze.</p>
       </small>
       <textarea class="form-textarea" name="message" rows="8" required />
     </label>
