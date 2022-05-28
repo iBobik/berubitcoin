@@ -5,6 +5,7 @@
     <p>Který podnik může být do této mapy přidán jako ověřený?</p>
     <ul class="m-2 list-disc list-inside">
       <li>Přijímá Bitcoin pomocí Lightning Network</li>
+      <li>Platba není závislá na konkrétním člověku, v&nbsp;podniku je vždy člověk schopný jí přijmout</li>
       <li>Je v Google Maps (tedy je veřejný a na jednom trvalém místě)</li>
       <li>Ověřena funkční platba - video z podniku, kde je vidět reálná platba přes LN (jednou ročně)</li>
     </ul>
