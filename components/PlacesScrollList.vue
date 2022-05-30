@@ -10,8 +10,8 @@
       v-for="place in places"
       :key="place.slug || place.coinmapId"
       :data-place-id="place.slug || place.coinmapId"
-      class="max-w-sm w-[70vw] bg-gray-700 snap-center drop-shadow-[0_0_1px_rgb(255,255,255)] self-end"
-      :class="{ 'bg-gray-800 drop-shadow-[0_0_2px_rgb(255,255,255)]': selectedPlaceId === (place.slug || place.coinmapId) }"
+      class="max-w-sm w-[70vw] bg-gray-700 snap-center drop-shadow-white-1 self-end"
+      :class="{ 'bg-gray-800 drop-shadow-white-2': selectedPlaceId === (place.slug || place.coinmapId) }"
       @click="$emit('update:selectedPlaceId', place.slug || place.coinmapId)"
     >
       <slot :place="place" />

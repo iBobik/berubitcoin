@@ -12,6 +12,10 @@ module.exports = {
         center: true,
         padding: '1rem'
       },
+      dropShadow: {
+        'white-1': '0 0 1px rgb(255, 255, 255)',
+        'white-2': '0 0 2px rgb(255, 255, 255)'
+      },
       scale: {
         200: '2'
       },
