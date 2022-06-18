@@ -43,7 +43,8 @@ export default {
   publicRuntimeConfig: {
     mapBounds: [[12, 47.7], [23, 51.1]],
     mapStyle: 'mapbox://styles/mapbox/dark-v10',
-    mapAccessToken: 'pk.eyJ1IjoicG9ib3JpbCIsImEiOiJja3dwY3lxYmMwYmk0MnBwNm96aDIzYWRiIn0.Sz9ldnB1zsjTVRFMdFrz0g'
+    mapAccessToken: 'pk.eyJ1IjoicG9ib3JpbCIsImEiOiJja3dwY3lxYmMwYmk0MnBwNm96aDIzYWRiIn0.Sz9ldnB1zsjTVRFMdFrz0g',
+    dooFrontendKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNGI2ZDkyMi1jOTA1LTQ1ODctYmJjZi02ODc4NjE5NWVjYTYiLCJ1bmlxdWVfbmFtZSI6ImFwaVRva2VuSWRfYWYxZmQxNDEtYjJhMi00OTRmLThlZDAtZjU5NzI3MDk2MDZiIiwicHVycG9zZSI6IkFQSVRva2VuIiwiYXBpVG9rZW5JZCI6ImFmMWZkMTQxLWIyYTItNDk0Zi04ZWQwLWY1OTcyNzA5NjA2YiIsIm5iZiI6MTY1Mzc0OTM4MywiZXhwIjo0ODA5NDIyOTgzLCJpYXQiOjE2NTM3NDkzODN9.r59Uf_aGUWSHktkacKB00rAT8D8LjTI9OHqxbYxYNLA'
   },
   privateRuntimeConfig: {
     googleCloudApiKey: process.env.GOOGLE_CLOUD_API_KEY
@@ -74,6 +75,8 @@ export default {
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
+
+  devServerHandlers: [], // Workaround for https://github.com/nuxt-community/tailwindcss-module/issues/480
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
