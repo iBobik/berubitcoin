@@ -63,7 +63,8 @@ export default {
       name: 'mapa.BeruBitcoin.cz',
       ogHost: 'https://mapa.berubitcoin.cz',
       ogImage: '/ogimage.jpg',
-      theme_color: '#f7931a'
+      theme_color: '#f7931a',
+      appleStatusBarStyle: 'black-translucent'
     },
     manifest: {
       name: 'mapa.BeruBitcoin.cz',
