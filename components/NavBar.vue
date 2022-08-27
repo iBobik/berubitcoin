@@ -1,5 +1,5 @@
 <template>
-  <div class="top-0 right-0 z-10 flex items-center h-12 left-2 place-content-between">
+  <div class="top-[env(safe-area-inset-top,_0)] right-0 z-10 flex items-center h-12 left-2 place-content-between">
     <h1 class="grow">
       <NuxtLink to="/">
         <img class="inline-block h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
