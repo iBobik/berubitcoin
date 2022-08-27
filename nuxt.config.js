@@ -7,7 +7,6 @@ export default {
     title: 'BeruBitcoin',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
@@ -71,7 +70,7 @@ export default {
       ogHost: 'https://mapa.berubitcoin.cz',
       ogImage: '/ogimage.jpg',
       theme_color: '#f7931a',
-      viewport: 'width=device-width, initial-scale=1, viewport-fit=cover'
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui, viewport-fit=cover'
     }
   },
 
