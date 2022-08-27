@@ -36,8 +36,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxt/content'
+    '@nuxtjs/pwa'
   ],
 
   publicRuntimeConfig: {
@@ -75,9 +74,6 @@ export default {
       viewport: 'width=device-width, initial-scale=1, viewport-fit=cover'
     }
   },
-
-  // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {},
 
   devServerHandlers: [], // Workaround for https://github.com/nuxt-community/tailwindcss-module/issues/480
 

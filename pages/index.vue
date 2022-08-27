@@ -60,7 +60,7 @@ import gmapsPlace from '~/lib/gmaps-place'
 import { fetchDoo } from '~/lib/tabidoo'
 
 export default {
-  async asyncData ({ $content, $config }) {
+  async asyncData ({ $config }) {
     if (process.client) { // Fetching does not work client-side, so enforce SSR
       location.reload()
     }
