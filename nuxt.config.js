@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'BeruBitcoin',
+    title: 'Mapa.BeruBitcoin.cz',
     meta: [
       { charset: 'utf-8' },
       { hid: 'description', name: 'description', content: '' }
@@ -59,14 +59,14 @@ export default {
     manifest: {
       background_color: '#343332',
       lang: 'cs',
-      name: 'mapa.BeruBitcoin.cz',
+      name: 'Mapa.BeruBitcoin.cz',
       short_name: 'BeruBitcoin'
     },
     meta: {
       appleStatusBarStyle: 'black-translucent',
       lang: 'cs',
       mobileAppIOS: true,
-      name: 'mapa.BeruBitcoin.cz',
+      name: 'Mapa.BeruBitcoin.cz',
       ogHost: 'https://mapa.berubitcoin.cz',
       ogImage: '/ogimage.jpg',
       theme_color: '#f7931a',
