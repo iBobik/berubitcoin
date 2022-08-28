@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-0 bottom-0 left-0 right-0">
+  <div class="absolute top-0 bottom-0 left-0 right-0 h-[calc(100%_+_env(safe-area-inset-top,_0))]">
     <client-only>
       <MglMap
         :access-token="$config.mapAccessToken"
@@ -101,6 +101,11 @@ export default {
 <style scoped>
 ::v-deep .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group {
   margin-bottom: 15rem;
+}
+
+::v-deep .mapboxgl-ctrl-bottom-right,
+::v-deep .mapboxgl-ctrl-bottom-left {
+  margin-bottom: env(safe-area-inset-bottom, 0);
 }
 
 ::v-deep button {
