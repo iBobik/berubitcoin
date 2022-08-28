@@ -1,5 +1,5 @@
 <template>
-  <div class="top-[env(safe-area-inset-top,_0)] right-0 z-10 flex items-center h-12 left-2 place-content-between">
+  <div class="top-0 right-0 z-10 flex items-center pt-[env(safe-area-inset-top,_0)] left-2 place-content-between">
     <h1 class="grow">
       <NuxtLink to="/">
         <img class="inline-block h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
@@ -9,7 +9,7 @@
     <NuxtLink to="/subscribe">
       <img class="w-5 h-5 m-2" src="~assets/notify.svg" alt="Notifikace">
     </NuxtLink>
-    <label role="navigation" class="relative">
+    <label role="navigation" class="relative my-0">
       <input type="checkbox" class="sr-only peer" aria-controls="menu">
       <div class="p-4 space-y-1 peer-checked:bg-gray-700">
         <div class="w-5 h-0.5 bg-white" />
