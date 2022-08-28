@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar class="absolute" />
+    <NavBar absolute />
 
     <WelcomePopup />
 

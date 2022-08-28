@@ -1,5 +1,8 @@
 <template>
-  <div class="top-0 right-0 z-10 flex items-center pt-[env(safe-area-inset-top,_0)] left-2 place-content-between">
+  <div
+    :class="absolute ? 'absolute top-0 left-2 right-0 z-10' : '-mr-4'"
+    class="pt-[env(safe-area-inset-top,_0)] flex items-center place-content-between"
+  >
     <h1 class="grow">
       <NuxtLink to="/">
         <img class="inline-block h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
@@ -20,10 +23,14 @@
         <component
           :is="item.href ? 'a' : 'NuxtLink'"
           v-for="item in menuLinks"
-          :key="item.to"
+          :key="item.to || item.href"
           :to="item.to"
           :href="item.href"
-          class="block px-4 py-2 no-underline border-b border-gray-800 hover:bg-gray-800"
+          class="block px-4 no-underline border-b border-gray-800 hover:bg-gray-800"
+          :class="item.category
+            ? 'pt-4 pb-1 text-xs font-semibold'
+            : 'py-2'
+          "
         >
           {{ item.text }}
         </component>
@@ -34,13 +41,17 @@
 
 <script>
 export default {
+  props: {
+    absolute: { type: Boolean, default: false }
+  },
   data: () => ({
     menuLinks: [
       { to: '/subscribe', text: 'Odebírat novinky' },
       { to: '/add-place', text: 'Přidat podnik' },
-      { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu' },
-      { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet?' },
-      { href: 'https://www.berubitcoin.cz/#kontakt', text: 'Kontakt' }
+      { category: true, href: 'https://www.berubitcoin.cz/', text: 'BeruBitcoin.cz' },
+      { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu ↗' },
+      { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet? ↗' },
+      { href: 'https://www.berubitcoin.cz/#kontakt', text: 'Kontakt ↗' }
     ]
   })
 }
