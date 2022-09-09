@@ -48,6 +48,7 @@ export default {
     menuLinks: [
       { to: '/subscribe', text: 'Odebírat novinky' },
       { to: '/add-place', text: 'Přidat podnik' },
+      { href: 'https://github.com/ibobik/berubitcoin', text: 'GitHub ↗' },
       { category: true, href: 'https://www.berubitcoin.cz/', text: 'BeruBitcoin.cz' },
       { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu ↗' },
       { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet? ↗' },
