@@ -19,7 +19,7 @@
     @apply my-4;
   }
 
-  input[type='submit'], button {
-    @apply p-2 my-4 text-white bg-btcOrange;
+  input[type='submit'], button, .button {
+    @apply inline-block p-2 my-4 text-white no-underline bg-btcOrange;
   }
 }

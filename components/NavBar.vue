@@ -5,7 +5,7 @@
   >
     <h1 class="grow">
       <NuxtLink to="/">
-        <img class="inline-block h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
+        <img class="inline-block h-7" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
       </NuxtLink>
     </h1>
 

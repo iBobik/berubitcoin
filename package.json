@@ -1,40 +1,26 @@
 {
-  "name": "berubitcoincz",
-  "version": "1.0.0",
+  "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "wrangler": "nuxt generate --devtools && wrangler pages dev ./dist",
-    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "npm run lint:js",
-    "lintfix": "npm run lint:js -- --fix"
-  },
-  "dependencies": {
-    "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/composition-api": "^0.32.0",
-    "@nuxtjs/pwa": "^3.3.5",
-    "core-js": "^3.19.3",
-    "lodash.debounce": "^4.0.8",
-    "mapbox-gl": "^1.13.2",
-    "nuxt": "^2.15.8",
-    "v-mapbox": "^1.7.3",
-    "vue-server-renderer": "^2.6.14",
-    "vue-template-compiler": "^2.6.14",
-    "webpack": "^4.46.0"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.16.3",
-    "@nuxtjs/eslint-config": "^8.0.0",
-    "@nuxtjs/eslint-module": "^3.0.2",
-    "@nuxtjs/tailwindcss": "^5.0.2",
-    "@tailwindcss/forms": "^0.5.0",
-    "eslint": "^8.4.1",
-    "eslint-plugin-nuxt": "^3.1.0",
-    "node-fetch": "^2.6.7",
-    "postcss": "^8.4.4",
-    "wrangler": "^0.0.25"
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@types/node": "^18",
+    "@vite-pwa/nuxt": "^0.1.0",
+    "@vueuse/core": "^10.2.1",
+    "@vueuse/nuxt": "^10.2.1",
+    "nuxt": "^3.6.1"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "mapbox-gl": "^2.15.0",
+    "vue-mapbox-ts": "file:../../Applications/vue-mapbox-ts"
   }
 }

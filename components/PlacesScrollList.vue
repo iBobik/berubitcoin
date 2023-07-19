@@ -1,5 +1,6 @@
 <template>
   <ul
+    ref="containerRef"
     class="
       absolute bottom-0 left-0 right-0 z-10
       grid grid-flow-col gap-4 pt-1 pb-10 px-[15vw] sm:px-[calc((100vw_-_24rem)/2)]
@@ -7,54 +8,53 @@
     "
   >
     <li
-      v-for="place in places"
-      :key="place.slug || place.coinmapId"
-      :data-place-id="place.slug || place.coinmapId"
-      class="max-w-sm w-[70vw] bg-gray-700 snap-center drop-shadow-white-1 self-end"
-      :class="{ 'bg-gray-800 drop-shadow-white-2': selectedPlaceId === (place.slug || place.coinmapId) }"
-      @click="$emit('update:selectedPlaceId', place.slug || place.coinmapId)"
+      v-for="item in items"
+      :key="item.id"
+      :data-item-id="item.id"
+      :ref="el => el ? itemsRefs.set(item.id, el as HTMLElement) : itemsRefs.delete(item.id)"
+      class="self-end snap-center"
+      @click="$emit('update:selectedItemId', item.id)"
     >
-      <slot :place="place" />
+      <slot :item="item" />
     </li>
   </ul>
 </template>
 
-<script>
-import debounce from 'lodash/debounce'
+<script lang="ts" setup>
 
-export default {
-  props: {
-    places: { type: Array, default: () => [] },
-    selectedPlaceId: { type: [Number, String, null], default: null }
-  },
+const emit = defineEmits<{
+  (event: 'update:selectedItemId', placeId: number): void
+}>()
 
-  watch: {
-    selectedPlaceId (id) {
-      this.$el.querySelector(`[data-place-id='${id}']`).scrollIntoView({ behavior: 'smooth', inline: 'center' })
-    }
-  },
+const props = defineProps<{
+  items: any[]
+  selectedItemId: number | undefined
+}>()
 
-  mounted () {
-    this.handleDebouncedScroll = debounce(this.scrollStopped, 2000)
-    this.$el.addEventListener('scroll', this.handleDebouncedScroll)
-    if (!this.selectedPlaceId && this.places.length) {
-      this.$emit('update:selectedPlaceId', this.places[0].slug || this.places[0].coinmapId)
-    }
-  },
+const containerRef = ref<HTMLElement>()
+const itemsRefs = ref<Map<number, HTMLElement>>(new Map())
 
-  beforeDestroy () {
-    this.$el.removeEventListener('scroll', this.handleDebouncedScroll)
-  },
+watch(props.items, () => {
+  // If the selected item is not in the list, select the first item
+  if (!props.selectedItemId || props.items.find(item => item.id === props.selectedItemId) === undefined) {
+    emit('update:selectedItemId', props.items[0].id)
+  }
+}, { immediate: true })
 
-  methods: {
-    scrollStopped (event) {
-      const centerX = this.$el.offsetLeft + this.$el.offsetWidth / 2
-      const centerY = this.$el.offsetTop + this.$el.offsetHeight / 2
-      const centerEl = document.elementsFromPoint(centerX, centerY).find(el => el.dataset.placeId)
-      if (centerEl) {
-        this.$emit('update:selectedPlaceId', Number(centerEl.dataset.placeId) || centerEl.dataset.placeId)
-      }
+watch(() => props.selectedItemId, id => {
+  itemsRefs.value.get(id!)?.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+})
+
+const { isScrolling } = useScroll(containerRef)
+watch(isScrolling, () => {
+  if (!isScrolling.value) {
+    const centerX = containerRef.value!.offsetLeft + containerRef.value!.offsetWidth / 2
+    const centerY = containerRef.value!.offsetTop + containerRef.value!.offsetHeight / 2
+    const centerEl = document.elementsFromPoint(centerX, centerY).find(el => (el as HTMLElement).dataset.itemId) as HTMLElement
+    if (centerEl.dataset.itemId) {
+      emit('update:selectedItemId', parseInt(centerEl.dataset.itemId))
     }
   }
-}
+})
+
 </script>
