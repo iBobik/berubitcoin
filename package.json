@@ -21,6 +21,6 @@
   "dependencies": {
     "date-fns": "^2.30.0",
     "mapbox-gl": "^2.15.0",
-    "vue-mapbox-ts": "file:../../Applications/vue-mapbox-ts"
+    "vue-mapbox-ts": "gitlab:janpoboril/vue-mapbox-ts#geolocation-position"
   }
 }
