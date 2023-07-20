@@ -22,6 +22,14 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
 
+  nitro: {
+    prerender: {
+      ignore: [
+        '/%23', // Workaround: https://github.com/nuxt/nuxt/issues/22180
+      ],
+    },
+  },
+
   runtimeConfig: {
     public: {
       mapBounds: [[12, 47.7], [23, 51.1]],
