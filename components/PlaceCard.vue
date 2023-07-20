@@ -35,7 +35,7 @@
 
       <p class="mt-8 text-xs text-center">
         Sedí vše? Dej ostatním vědět že se na to můžou spolehnout:
-        <NuxtLink to="TODO" class="button">Ověřit platnost</NuxtLink>
+        <NuxtLink :to="`/verify?placeId=${item.id}`" class="button">Ověřit platnost</NuxtLink>
       </p>
     </div>
   </div>

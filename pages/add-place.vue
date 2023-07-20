@@ -6,8 +6,8 @@
     <ul class="m-2 list-disc list-inside">
       <li>Přijímá Bitcoin pomocí Lightning Network</li>
       <li>Platba není závislá na konkrétním člověku, v&nbsp;podniku je vždy člověk schopný jí přijmout</li>
-      <li>Je v Google Maps (tedy je veřejný a na jednom trvalém místě)</li>
-      <li>Ověřena funkční platba - video z podniku, kde je vidět reálná platba přes LN (jednou ročně)</li>
+      <li>Podnik je veřejný a na jednom trvalém místě</li>
+      <li>Ověřena funkční platba alespoň jednou ročně</li>
     </ul>
     <p>Pokud chcete se zavedením plateb pomoci, tak <a href="https://www.berubitcoin.cz/" target="_blank">nabízíme konzultace zdarma</a>.</p>
     <p>Pokud už vše splňujete, <a href="https://www.berubitcoin.cz/#kontakt" target="_blank">tak se ozvěte</a>.</p>

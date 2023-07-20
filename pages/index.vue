@@ -32,6 +32,10 @@ const { public: config } = useRuntimeConfig()
 const globalBounds = new mapboxgl.LngLatBounds(config.mapBounds as [[number, number], [number, number]])
 const currentBounds = ref<mapboxgl.LngLatBounds>(globalBounds)
 
+definePageMeta({
+  keepalive: true,
+})
+
 interface Place {
   id: number
   name: string
