@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "cloudflare": "NITRO_PRESET=cloudflare_pages nuxt build && mv dist dist-build && nuxt generate && mv dist-build/_worker.js dist/ # https://github.com/unjs/nitro/issues/196",
+    "cloudflare": "NITRO_PRESET=cloudflare_pages nuxt build && mv dist dist-build && NITRO_PRESET=cloudflare_pages nuxt generate && mv dist-build/_worker.js dist/ # https://github.com/unjs/nitro/issues/196",
     "dev": "nuxt dev",
     "postinstall": "nuxt prepare"
   },
