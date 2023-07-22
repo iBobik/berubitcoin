@@ -115,4 +115,14 @@ const placesInMap = computed(() => {
   }
   return placesAll.value
 })
+
+
+useHead({
+  htmlAttrs: {
+    class: 'h-full overflow-hidden'
+  },
+  bodyAttrs: {
+    class: 'h-full overflow-hidden'
+  },
+})
 </script>

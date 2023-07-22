@@ -34,7 +34,7 @@ const props = defineProps<{
 const containerRef = ref<HTMLElement>()
 const itemsRefs = ref<Map<number, HTMLElement>>(new Map())
 
-watch(props.items, () => {
+watch(() => props.items, () => {
   // If the selected item is not in the list, select the first item
   if (!props.selectedItemId || props.items.find(item => item.id === props.selectedItemId) === undefined) {
     emit('update:selectedItemId', props.items[0].id)

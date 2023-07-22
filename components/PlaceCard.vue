@@ -4,27 +4,29 @@
     :class="{
       'bg-gray-800 drop-shadow-white-2': selected && !expanded,
       'bg-gray-700 drop-shadow-white-1': !selected && !expanded,
-      'h-[calc(100vh-5rem)] bg-gray-800 drop-shadow-white-3': expanded,
-      'h-20 cursor-pointer': !expanded,
+      'h-[min(calc(100vh-6rem),30rem)] bg-gray-800 drop-shadow-white-3 overflow-scroll flex flex-col': expanded,
+      'h-20 cursor-pointer overflow-hidden': !expanded,
     }"
   >
-    <p class="float-right">{{ item.type }}</p>
-    <h2 class="mb-4 text-base truncate">{{ item.name }}</h2>
+    <div class="flex flex-wrap gap-2 mb-3" :class="{ 'h-7 overflow-hidden select-none': !expanded }">
+      <h2 class="text-base truncate">{{ item.name }}</h2>
+      <p class="text-right grow">{{ item.type }}</p>
+    </div>
 
-    <div class="mt-1 text-gray-300">
-      <p class="float-right">
+    <div class="flex flex-wrap gap-2 mt-1 text-gray-300" :class="{ 'h-9 select-none': !expanded }">
+      <p>
+        <img v-if="item.verifiedIcon" src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
+        přijímá Bitcoin přes {{ acceptsStrs.join(', ') }}
+      </p>
+      <p class="text-right grow">
         <span v-if="item.verified">
           ✓ {{ formatDistanceToNowStrict(item.verified, { locale: cs }) }}
         </span>
         <span v-else>neověřeno</span>
       </p>
-      <p>
-        <img v-if="item.verifiedIcon" src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
-        přijímá Bitcoin přes {{ acceptsStrs.join(', ') }}
-      </p>
     </div>
 
-    <div v-if="expanded" class="mt-4 text-sm">
+    <div v-if="expanded" class="mt-4 text-sm grow">
       <p v-if="item.description" class="mb-2">{{ item.description }}</p>
       <a v-if="item.phone" class="block mb-2" :href="`tel:${item.phone.replace(/ \(\)/, '')}`">{{ item.phone }}</a>
       <a v-if="item.website" class="block mb-2" :href="item.website">{{ item.website }}</a>
@@ -32,12 +34,12 @@
       TODO: Adresa
 
       TODO: Otevřít v mapách - Google, Apple, Mapy.cz, OSM
-
-      <p class="mt-8 text-xs text-center">
-        Sedí vše? Dej ostatním vědět že se na to můžou spolehnout:
-        <NuxtLink :to="`/verify?placeId=${item.id}`" class="button">Ověřit platnost</NuxtLink>
-      </p>
     </div>
+
+    <p v-if="expanded" class="mt-8 text-xs text-center">
+      Sedí vše? Dej ostatním vědět že se na to můžou spolehnout:<br>
+      <NuxtLink :to="`/verify?placeId=${item.id}`" class="button">Ověřit platnost</NuxtLink>
+    </p>
   </div>
 </template>
 
