@@ -55,7 +55,7 @@ function onTouchMove (event: TouchEvent) {
 
   if (Math.abs(diffX) > Math.abs(diffY)) return // Horizontal swipe
 
-  if (diffY > 10 && expanded.value) { // Swipe down
+  if (diffY > 10 && expanded.value && card.value!.scrollTop <= 0) { // Swipe down
     expanded.value = false
     touchStart = null
   }

@@ -20,6 +20,6 @@
   }
 
   input[type='submit'], button, .button {
-    @apply inline-block p-2 my-4 text-white no-underline bg-btcOrange;
+    @apply inline-block w-auto px-4 py-2 my-4 text-white no-underline bg-btcOrange;
   }
 }

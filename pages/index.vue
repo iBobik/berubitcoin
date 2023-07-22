@@ -2,7 +2,7 @@
   <div>
     <NavBar absolute />
 
-    <WelcomePopup />
+    <!-- <WelcomePopup /> -->
 
     <CustomMap
       :dot-markers="placesAll?.filter(place => !place.verifiedIcon)"
@@ -119,7 +119,7 @@ const placesInMap = computed(() => {
 
 useHead({
   htmlAttrs: {
-    class: 'h-full overflow-hidden'
+    class: 'h-full overflow-hidden overscroll-none'
   },
   bodyAttrs: {
     class: 'h-full overflow-hidden'

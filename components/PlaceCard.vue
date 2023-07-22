@@ -1,19 +1,19 @@
 <template>
   <div
-    class="max-w-sm w-[70vw] px-4 py-3 text-xs transition-all hover:brightness-110"
+    class="max-w-sm w-[70vw] px-4 py-3 text-xs transition-all hover:brightness-110 border border-gray-200"
     :class="{
-      'bg-gray-800 drop-shadow-white-2': selected && !expanded,
-      'bg-gray-700 drop-shadow-white-1': !selected && !expanded,
-      'h-[min(calc(100vh-6rem),30rem)] bg-gray-800 drop-shadow-white-3 overflow-scroll flex flex-col': expanded,
+      'bg-gray-800 border-opacity-80': selected,
+      'bg-gray-700 border-opacity-40': !selected,
+      'h-[min(calc(100vh-6rem),30rem)] overflow-scroll flex flex-col': expanded,
       'h-20 cursor-pointer overflow-hidden': !expanded,
     }"
   >
-    <div class="flex flex-wrap gap-2 mb-3" :class="{ 'h-7 overflow-hidden select-none': !expanded }">
+    <div class="flex flex-wrap gap-4 mb-3" :class="{ 'h-7 overflow-hidden select-none': !expanded }">
       <h2 class="text-base truncate">{{ item.name }}</h2>
       <p class="text-right grow">{{ item.type }}</p>
     </div>
 
-    <div class="flex flex-wrap gap-2 mt-1 text-gray-300" :class="{ 'h-9 select-none': !expanded }">
+    <div class="flex flex-wrap gap-4 mt-1 text-gray-300" :class="{ 'h-9 select-none': !expanded }">
       <p>
         <img v-if="item.verifiedIcon" src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
         přijímá Bitcoin přes {{ acceptsStrs.join(', ') }}

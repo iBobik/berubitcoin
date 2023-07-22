@@ -112,11 +112,20 @@ function flyTo (position: [number, number]) {
   height: 100%;
 }
 
-:deep(.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group) {
+/* :deep(.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group) {
   margin-bottom: 15rem;
 }
+Fix until https://gitlab.com/relief-melone/vue-mapbox-ts/-/merge_requests/70
+*/
+:deep(.mapboxgl-ctrl-top-right) {
+  top: auto;
+  bottom: 10rem;
+}
 
-:deep(.mapboxgl-ctrl-bottom-right),
+:deep(.mapboxgl-ctrl-bottom-right) {
+  display: none;
+}
+
 :deep(.mapboxgl-ctrl-bottom-left) {
   margin-bottom: env(safe-area-inset-bottom, 0);
 }

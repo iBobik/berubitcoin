@@ -48,8 +48,9 @@ watch(() => props.selectedItemId, id => {
 const { isScrolling } = useScroll(containerRef)
 watch(isScrolling, () => {
   if (!isScrolling.value) {
+    // Find which card is at the center of the container
     const centerX = containerRef.value!.offsetLeft + containerRef.value!.offsetWidth / 2
-    const centerY = containerRef.value!.offsetTop + containerRef.value!.offsetHeight / 2
+    const centerY = containerRef.value!.offsetTop + containerRef.value!.offsetHeight - 50
     const centerEl = document.elementsFromPoint(centerX, centerY).find(el => (el as HTMLElement).dataset.itemId) as HTMLElement
     if (centerEl.dataset.itemId) {
       emit('update:selectedItemId', parseInt(centerEl.dataset.itemId))
