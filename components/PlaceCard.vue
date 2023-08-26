@@ -31,13 +31,12 @@
       <a v-if="item.phone" class="block mb-2" :href="`tel:${item.phone.replace(/ \(\)/, '')}`">{{ item.phone }}</a>
       <a v-if="item.website" class="block mb-2" :href="item.website">{{ item.website }}</a>
 
-      TODO: Adresa
-
-      TODO: Otevřít v mapách - Google, Apple, Mapy.cz, OSM
+      <OpenInMapApp :osm-id="item.id" :name="item.name" :lng-lat="item.lngLat" />
     </div>
 
     <p v-if="expanded" class="mt-8 text-xs text-center">
       Sedí vše? Dej ostatním vědět že se na to můžou spolehnout:<br>
+      <el-button type="primary">Ověřit platnost</el-button>
       <NuxtLink :to="`/verify?placeId=${item.id}`" class="button">Ověřit platnost</NuxtLink>
     </p>
   </div>
@@ -46,6 +45,7 @@
 <script lang="ts" setup>
 import { formatDistanceToNowStrict } from 'date-fns'
 import { cs } from 'date-fns/locale'
+import OpenInMapApp from './OpenInMapApp.vue';
 
 const props = defineProps<{
   item: {
@@ -57,6 +57,7 @@ const props = defineProps<{
     type?: string
     verified?: Date
     verifiedIcon: boolean
+    lngLat: [number, number]
     accepts: {
       ln?: true
       lnNfc?: true

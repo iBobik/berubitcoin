@@ -16,7 +16,12 @@ export default defineNuxtConfig({
     },
   },
 
+  elementPlus: {
+    importStyle: 'scss',
+  },
+
   modules: [
+    '@element-plus/nuxt',
     '@vite-pwa/nuxt',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
@@ -62,6 +67,13 @@ export default defineNuxtConfig({
   telemetry: false,
 
   vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/assets/css/el-override.scss" as element;`,
+        },
+      },
+    },
     server: {
       fs: {
         allow: [
