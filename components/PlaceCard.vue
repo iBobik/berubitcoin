@@ -31,14 +31,16 @@
       <a v-if="item.phone" class="block mb-2" :href="`tel:${item.phone.replace(/ \(\)/, '')}`">{{ item.phone }}</a>
       <a v-if="item.website" class="block mb-2" :href="item.website">{{ item.website }}</a>
 
-      <OpenInMapApp :osm-id="item.id" :name="item.name" :lng-lat="item.lngLat" />
+      <div class="text-right">
+        <OpenInMapApp :osm-id="item.id" :name="item.name" :lng-lat="item.lngLat" />
+      </div>
     </div>
 
-    <p v-if="expanded" class="mt-8 text-xs text-center">
+    <!-- <p v-if="expanded" class="mt-8 text-xs text-center">
       Sedí vše? Dej ostatním vědět že se na to můžou spolehnout:<br>
       <el-button type="primary">Ověřit platnost</el-button>
       <NuxtLink :to="`/verify?placeId=${item.id}`" class="button">Ověřit platnost</NuxtLink>
-    </p>
+    </p> -->
   </div>
 </template>
 

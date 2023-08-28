@@ -3,5 +3,11 @@
     'primary': (
       'base': #f7931a,
     ),
-  )
+  ),
+  $border-radius: (
+    'base': 0,
+    'small': 2px,
+    'round': 5px,
+    'circle': 100%,
+  ),
 );

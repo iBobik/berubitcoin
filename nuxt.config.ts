@@ -12,12 +12,16 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
+      ],
+      htmlAttrs: {
+        class: ['dark']
+      },
     },
   },
 
   elementPlus: {
     importStyle: 'scss',
+    themes: ['dark'],
   },
 
   modules: [
