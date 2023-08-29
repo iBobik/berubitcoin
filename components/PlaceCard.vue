@@ -16,7 +16,7 @@
     <div class="flex flex-wrap gap-4 mt-1 text-gray-300" :class="{ 'h-9 select-none': !expanded }">
       <p>
         <img v-if="item.verifiedIcon" src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
-        přijímá Bitcoin přes {{ acceptsStrs.join(', ') }}
+        přijímá Bitcoin {{ acceptsStrs.length ? `přes ${acceptsStrs.join(', ')}` : '' }}
       </p>
       <p class="text-right grow">
         <span v-if="item.verified">
