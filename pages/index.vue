@@ -2,109 +2,127 @@
   <div>
     <NavBar absolute />
 
-    <WelcomePopup />
+    <!-- <WelcomePopup /> -->
 
-    <IsomorphicMap
-      :coinmap-markers="coinmapPlaces.map(place => ({
-        coordinates: place.lonLat,
-        id: place.coinmapId,
-      }))"
-      :verified-markers="verifiedPlaces.map(place => ({
-        coordinates: place.lonLat,
-        id: place.slug,
-      }))"
-      :selected-place-id.sync="selectedPlaceId"
-      @moveend="(bounds) => currentBounds = bounds"
+    <CustomMap
+      :dot-markers="placesAll?.filter(place => !place.verifiedIcon)"
+      :lightning-markers="placesAll?.filter(place => place.verifiedIcon)"
+      v-model:selected-place-id="selectedPlaceId"
+      v-model:current-bounds="currentBounds"
     />
 
-    <PlacesScrollList :places="placesInMap" :selected-place-id.sync="selectedPlaceId">
-      <template #default="{ place }">
-        <div v-if="place.photos" class="flex gap-1 overflow-x-hidden h-28">
-          <img
-            v-for="(photo, i) in place.photos"
-            :key="photo"
-            :src="photo"
-            :lazy="i ? 'lazy' : 'eager'"
-          >
-        </div>
-
-        <div class="p-4">
-          <h2 class="mb-4 truncate">{{ place.name }}</h2>
-          <div class="mt-1 text-xs text-gray-300">
-            <p class="float-right">
-              <a v-if="place.gMapsUrl" :href="place.gMapsUrl" target="bb-place">
-                Google Maps
-              </a>
-              <span v-if="place.coinmapId">
-                zdroj:
-                <a :href="`https://coinmap.org/venue/${place.coinmapId}`" target="bb-place">
-                  coinmap.org
-                </a>
-              </span>
-            </p>
-            <p v-if="place.verified">
-              <img src="~assets/ln_marker.svg" width="15" class="inline-block mr-1 -mt-2 -mb-1">
-              přijímá <a href="https://www.alza.cz/lightning-network">Bitcoin LN</a>
-            </p>
-            <p v-else>neověřeno</p>
-          </div>
-        </div>
+    <PlacesScrollList :items="placesInMap" v-model:selected-item-id="selectedPlaceId">
+      <template #default="{ item }: { item: Place }">
+        <ScrollExpandCard :can-expand="item.id === selectedPlaceId">
+          <template #default="{ expanded }">
+            <PlaceCard :item="item" :selected="item.id === selectedPlaceId" :expanded="expanded" @expanded="selectedPlaceId = item.id" />
+          </template>
+        </ScrollExpandCard>
       </template>
     </PlacesScrollList>
   </div>
 </template>
 
-<script>
-import coinmapPlacesLoad from '~/lib/coinmap-places'
-import gmapsPlace from '~/lib/gmaps-place'
-import { fetchDoo } from '~/lib/tabidoo'
+<script lang="ts" setup>
+import type { BtcMapPlace } from '@/btcmap'
+import mapboxgl from 'mapbox-gl'
 
-export default {
-  async asyncData ({ $config }) {
-    if (process.client) { // Fetching does not work client-side, so enforce SSR
-      location.reload()
-    }
+const selectedPlaceId = ref<number>()
+const { public: config } = useRuntimeConfig()
+const globalBounds = new mapboxgl.LngLatBounds(config.mapBounds as [[number, number], [number, number]])
+const currentBounds = ref<mapboxgl.LngLatBounds>(globalBounds)
 
-    let { data: verifiedPlaces } = await fetchDoo(process.env.TABIDOO_JWT, 'tables/Places/data?filter=active(eq)true')
-    verifiedPlaces = await Promise.all(verifiedPlaces.map(async record => ({
-      ...record.fields,
-      googleMaps: await gmapsPlace($config.googleCloudApiKey, record.fields.googleMapsID)
-    })))
+definePageMeta({
+  keepalive: true,
+})
 
-    const verifiedPlacesCoinmapIDs = verifiedPlaces.map(p => p.coinMapID).filter(p => p)
-
-    return {
-      verifiedPlaces: verifiedPlaces.map(place => ({
-        slug: place.slug,
-        name: place.name,
-        verified: true,
-        photos: place.googleMaps.photos,
-        lonLat: [place.googleMaps.geometry.location.lng, place.googleMaps.geometry.location.lat],
-        gMapsUrl: place.googleMaps.url
-      })),
-      coinmapPlaces: (await coinmapPlacesLoad($config.mapBounds)).map(place => ({
-        coinmapId: place.id,
-        name: place.name,
-        lonLat: [place.lon, place.lat]
-      })).filter(place => !verifiedPlacesCoinmapIDs.includes(place.coinmapId))
-    }
-  },
-
-  data () {
-    return {
-      selectedPlaceId: null,
-      currentBounds: null
-    }
-  },
-
-  computed: {
-    placesInMap () {
-      const all = this.verifiedPlaces.concat(this.coinmapPlaces)
-      if (this.currentBounds) {
-        return all.filter(place => this.currentBounds.contains(place.lonLat))
-      }
-      return all
-    }
+interface Place {
+  id: number
+  name: string
+  description?: string
+  website?: string
+  phone?: string
+  type?: string
+  lngLat: [number, number]
+  verified?: Date
+  verifiedIcon: boolean
+  accepts: {
+    ln?: true
+    lnNfc?: true
+    onchain?: true
   }
 }
+
+const { data: placesCompressed } = useAsyncData('places', async () => {
+  let btcmap = await $fetch<BtcMapPlace[]>('https://api.btcmap.org/v2/elements')
+
+  type PlaceCompressed = Omit<Omit<Place, 'verifiedIcon'>, 'verified'> & { verified?: string }
+
+  return btcmap
+    .filter(place => place.osm_json?.lon && place.osm_json?.lat && globalBounds.contains([place.osm_json.lon, place.osm_json.lat]))
+    .map(place => {
+      try {
+        const verified = [
+          place.osm_json.tags['survey:date'],
+          place.osm_json.tags['survey:date:currency:XBT'],
+        ].filter(d => d).sort().reverse()[0]
+
+        return trimFalseProps({
+          id: place.osm_json.id,
+          name: place.osm_json.tags.name ?? place.osm_json.tags.operator,
+          description: place.osm_json.tags.description,
+          website: place.osm_json.tags.website,
+          phone: place.osm_json.tags.phone,
+          type: place.osm_json.tags.amenity,
+          lngLat: [place.osm_json.lon, place.osm_json.lat],
+          verified,
+          accepts: {
+            ln: place.osm_json.tags['payment:lightning'] === 'yes',
+            lnNfc: place.osm_json.tags['payment:lighning_contactless'] === 'yes',
+            onchain: place.osm_json.tags['payment:onchain'] === 'yes' || place.osm_json.tags['payment:bitcoin'] === 'yes',
+          }
+        })
+      } catch (e) {
+        console.log(place, e)
+      }
+    })
+    .filter(place => place)
+    .sort((a, b) => {
+      if (a!.verified && b!.verified) {
+        return a!.verified > b!.verified ? -1 : 1
+      }
+      if (a!.verified) return -1
+      if (b!.verified) return 1
+      return 0
+    }) as PlaceCompressed[]
+}, { lazy: true })
+
+const placesAll = computed(() => {
+  const oneYearAgo = new Date()
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+  const oneYearAgoString = oneYearAgo.toISOString().substring(0, 10)
+
+  return placesCompressed.value?.map(place => ({
+    ...place,
+    verified: place.verified ? new Date(place.verified) : undefined,
+    verifiedIcon: place.verified && place.verified > oneYearAgoString && place.accepts.ln,
+  })) ?? []
+})
+
+const placesInMap = computed(() => {
+  if (placesAll.value && currentBounds.value) {
+    return placesAll.value.filter(place => currentBounds.value.contains(place.lngLat))
+  }
+  return placesAll.value
+})
+
+
+useHead({
+  htmlAttrs: {
+    class: 'h-full overflow-hidden overscroll-none'
+  },
+  bodyAttrs: {
+    class: 'h-full overflow-hidden'
+  },
+})
 </script>

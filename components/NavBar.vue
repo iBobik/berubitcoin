@@ -5,13 +5,10 @@
   >
     <h1 class="grow">
       <NuxtLink to="/">
-        <img class="inline-block h-6" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
+        <img class="inline-block h-7" src="~assets/logo_bb.svg" alt="BeruBitcoin.cz">
       </NuxtLink>
     </h1>
 
-    <NuxtLink to="/subscribe">
-      <img class="w-5 h-5 m-2" src="~assets/notify.svg" alt="Notifikace">
-    </NuxtLink>
     <label role="navigation" class="relative my-0">
       <input type="checkbox" class="sr-only peer" aria-controls="menu">
       <div class="p-4 space-y-1 peer-checked:bg-gray-700">
@@ -39,21 +36,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    absolute: { type: Boolean, default: false }
-  },
-  data: () => ({
-    menuLinks: [
-      { to: '/subscribe', text: 'Odebírat novinky' },
-      { to: '/add-place', text: 'Přidat podnik' },
-      { href: 'https://github.com/ibobik/berubitcoin', text: 'GitHub ↗' },
-      { category: true, href: 'https://www.berubitcoin.cz/', text: 'BeruBitcoin.cz' },
-      { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu ↗' },
-      { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet? ↗' },
-      { href: 'https://www.berubitcoin.cz/#kontakt', text: 'Kontakt ↗' }
-    ]
-  })
-}
+<script lang="ts" setup>
+const props = defineProps<{
+  absolute?: boolean
+}>()
+
+const menuLinks = [
+  { to: '/add-place', text: 'Přidat podnik' },
+  { href: 'https://github.com/ibobik/berubitcoin', text: 'GitHub ↗' },
+  { category: true, href: 'https://www.berubitcoin.cz/', text: 'BeruBitcoin.cz' },
+  { href: 'https://www.berubitcoin.cz/', text: 'O přijímání Bitcoinu ↗' },
+  { href: 'https://www.berubitcoin.cz/#faq-proc-utracet', text: 'Proč Bitcoin utrácet? ↗' },
+  { href: 'https://www.berubitcoin.cz/#kontakt', text: 'Kontakt ↗' }
+]
 </script>
