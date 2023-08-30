@@ -64,6 +64,7 @@ const props = defineProps<{
       ln?: true
       lnNfc?: true
       onchain?: true
+      qerko?: true
     }
   }
   selected: boolean
@@ -77,6 +78,7 @@ const acceptsStrs = computed(() => {
   if (accepts.ln) acceptsStrs.push('LN')
   if (accepts.lnNfc) acceptsStrs.push('NFC')
   if (accepts.onchain) acceptsStrs.push('on-chain')
+  if (accepts.qerko) acceptsStrs.push('Qerko')
 
   return acceptsStrs
 })

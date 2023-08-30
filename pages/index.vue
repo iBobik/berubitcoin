@@ -80,6 +80,7 @@ const { data: placesCompressed } = useAsyncData('places', async () => {
             ln: place.osm_json.tags['payment:lightning'] === 'yes',
             lnNfc: place.osm_json.tags['payment:lighning_contactless'] === 'yes',
             onchain: place.osm_json.tags['payment:onchain'] === 'yes' || place.osm_json.tags['payment:bitcoin'] === 'yes',
+            qerko: place.osm_json.tags['payment:qerko:lightning'] === 'yes',
           }
         })
       } catch (e) {
