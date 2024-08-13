@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "cloudflare": "NITRO_PRESET=cloudflare_pages nuxt build",
+    "cloudflare": "NITRO_PRESET=cloudflare_pages nuxt build && NITRO_PRESET=static nuxt generate && cp -r dist/_worker.js public/_routes.json .output/public/ && rm -r dist && mv .output/public dist # https://github.com/nuxt/nuxt/issues/28526",
     "dev": "nuxt dev",
     "postinstall": "nuxt prepare"
   },
