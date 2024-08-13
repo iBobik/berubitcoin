@@ -2,7 +2,7 @@
   <div>
     <NavBar absolute />
 
-    <!-- <WelcomePopup /> -->
+    <WelcomePopup />
 
     <CustomMap
       :dot-markers="placesAll?.filter(place => !place.verifiedIcon)"
