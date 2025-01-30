@@ -98,6 +98,13 @@ const { data: placesCompressed } = useAsyncData('places', async () => {
     }) as PlaceCompressed[]
 }, { lazy: true })
 
+function parseDateOrUndefined(date: string | undefined): Date | undefined {
+  if (!date) return undefined
+  const d = new Date(date)
+  if (isNaN(d.getTime())) return undefined
+  return d
+}
+
 const placesAll = computed(() => {
   const oneYearAgo = new Date()
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
@@ -105,7 +112,7 @@ const placesAll = computed(() => {
 
   return placesCompressed.value?.map(place => ({
     ...place,
-    verified: place.verified ? new Date(place.verified) : undefined,
+    verified: parseDateOrUndefined(place.verified),
     verifiedIcon: place.verified && place.verified > oneYearAgoString && place.accepts.ln,
   })) ?? []
 })
