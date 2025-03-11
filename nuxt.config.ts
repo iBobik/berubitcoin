@@ -8,16 +8,18 @@ export default defineNuxtConfig({
       title: 'Mapa.BeruBitcoin.cz',
       meta: [
         { charset: 'utf-8' },
-        { hid: 'description', name: 'description', content: '' }
+        { name: 'description', content: '' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ],
       htmlAttrs: {
-        class: ['dark']
+        class: 'dark'
       },
     },
   },
+
+  devtools: { enabled: true, vueDevTools: true },
 
   elementPlus: {
     importStyle: 'scss',
@@ -30,6 +32,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
   ],
+
+  nitro: {
+    storage: {
+      cache: {
+        driver: 'cloudflare-kv-binding',
+      },
+    },
+  },
 
   runtimeConfig: {
     public: {

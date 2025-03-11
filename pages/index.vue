@@ -12,7 +12,7 @@
     />
 
     <PlacesScrollList :items="placesInMap" v-model:selected-item-id="selectedPlaceId">
-      <template #default="{ item }: { item: Place }">
+      <template #default="{ item }">
         <ScrollExpandCard :can-expand="item.id === selectedPlaceId">
           <template #default="{ expanded }">
             <PlaceCard :item="item" :selected="item.id === selectedPlaceId" :expanded="expanded" @expanded="selectedPlaceId = item.id" />
@@ -24,7 +24,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { BtcMapPlace } from '@/btcmap'
 import mapboxgl from 'mapbox-gl'
 
 const selectedPlaceId = ref<number>()
@@ -36,67 +35,9 @@ definePageMeta({
   keepalive: true,
 })
 
-interface Place {
-  id: number
-  name: string
-  description?: string
-  website?: string
-  phone?: string
-  type?: string
-  lngLat: [number, number]
-  verified?: Date
-  verifiedIcon: boolean
-  accepts: {
-    ln?: true
-    lnNfc?: true
-    onchain?: true
-  }
-}
 
-const { data: placesCompressed } = useAsyncData('places', async () => {
-  let btcmap = await $fetch<BtcMapPlace[]>('https://api.btcmap.org/v2/elements')
+const { data: placesCompressed } = useFetch('/api/places', { lazy: true })
 
-  type PlaceCompressed = Omit<Omit<Place, 'verifiedIcon'>, 'verified'> & { verified?: string }
-
-  return btcmap
-    .filter(place => place.osm_json?.lon && place.osm_json?.lat && globalBounds.contains([place.osm_json.lon, place.osm_json.lat]))
-    .map(place => {
-      try {
-        const verified = [
-          place.osm_json.tags['survey:date'],
-          place.osm_json.tags['survey:date:currency:XBT'],
-        ].filter(d => d).sort().reverse()[0]
-
-        return trimFalseProps({
-          id: place.osm_json.id,
-          name: place.osm_json.tags.name ?? place.osm_json.tags.operator,
-          description: place.osm_json.tags.description,
-          website: place.osm_json.tags.website,
-          phone: place.osm_json.tags.phone,
-          type: place.osm_json.tags.amenity,
-          lngLat: [place.osm_json.lon, place.osm_json.lat],
-          verified,
-          accepts: {
-            ln: place.osm_json.tags['payment:lightning'] === 'yes',
-            lnNfc: place.osm_json.tags['payment:lighning_contactless'] === 'yes',
-            onchain: place.osm_json.tags['payment:onchain'] === 'yes' || place.osm_json.tags['payment:bitcoin'] === 'yes',
-            qerko: place.osm_json.tags['payment:qerko:lightning'] === 'yes',
-          }
-        })
-      } catch (e) {
-        console.log(place, e)
-      }
-    })
-    .filter(place => place)
-    .sort((a, b) => {
-      if (a!.verified && b!.verified) {
-        return a!.verified > b!.verified ? -1 : 1
-      }
-      if (a!.verified) return -1
-      if (b!.verified) return 1
-      return 0
-    }) as PlaceCompressed[]
-}, { lazy: true })
 
 function parseDateOrUndefined(date: string | undefined): Date | undefined {
   if (!date) return undefined
@@ -113,7 +54,7 @@ const placesAll = computed(() => {
   return placesCompressed.value?.map(place => ({
     ...place,
     verified: parseDateOrUndefined(place.verified),
-    verifiedIcon: place.verified && place.verified > oneYearAgoString && place.accepts.ln,
+    verifiedIcon: !!(place.verified && place.verified > oneYearAgoString && place.accepts.ln),
   })) ?? []
 })
 
