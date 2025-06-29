@@ -9,10 +9,11 @@
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.5",
     "@headlessui/vue": "^1.7.22",
+    "@nuxt/devtools": "^2.3.1",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@tailwindcss/forms": "^0.5.3",
     "@types/node": "^22.12.0",
-    "@vite-pwa/nuxt": "^0.10.6",
+    "@vite-pwa/nuxt": "^1.0.4",
     "@vueuse/core": "^13.0.0",
     "@vueuse/nuxt": "^13.0.0",
     "element-plus": "^2.3.9",
