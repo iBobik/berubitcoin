@@ -24,7 +24,7 @@ export default defineCachedEventHandler(async () => {
 
       const verified = [
         place.tags['survey:date'],
-        place.tags['survey:date:currency:XBT'],
+        place.tags['check_date:currency:XBT'],
       ].filter(d => d).sort().reverse()[0]
 
       return trimFalseProps({
