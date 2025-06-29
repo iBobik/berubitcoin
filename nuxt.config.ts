@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Mapa.BeruBitcoin.cz',
+      title: 'Mapa kde berou Bitcoin | BeruBitcoin.cz',
       meta: [
         { charset: 'utf-8' },
         { name: 'description', content: '' }
