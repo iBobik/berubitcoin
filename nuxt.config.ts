@@ -7,14 +7,24 @@ export default defineNuxtConfig({
     head: {
       title: 'Mapa kde berou Bitcoin | BeruBitcoin.cz',
       meta: [
+        { name: 'og:name', content: 'Mapa.BeruBitcoin.cz' },
+        { name: 'og:host', content: 'https://mapa.berubitcoin.cz' },
+        { name: 'og:image', content: '/ogimage.jpg' },
+        { name: 'apple-mobile-web-app-title', content: 'Mapa BB' },
         { charset: 'utf-8' },
-        { name: 'description', content: '' }
+        { name: 'lang', content: 'cs' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
+        { name: 'theme_color', content: '#f7931a' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui, viewport-fit=cover' },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', type: 'image/png', href: '/icon.png', sizes: '348x348' },
       ],
       htmlAttrs: {
-        class: 'dark'
+        class: 'dark',
       },
     },
   },
@@ -55,19 +65,10 @@ export default defineNuxtConfig({
       background_color: '#343332',
       lang: 'cs',
       name: 'Mapa.BeruBitcoin.cz',
-      short_name: 'BeruBitcoin'
+      short_name: 'Mapa BB',
+      icons: [{ src: '/icon.png', sizes: '348x348', type: 'image/png', purpose: 'any' }],
     },
     registerWebManifestInRouteRules: true,
-    /* meta: {
-      appleStatusBarStyle: 'black-translucent',
-      lang: 'cs',
-      mobileAppIOS: true,
-      name: 'Mapa.BeruBitcoin.cz',
-      ogHost: 'https://mapa.berubitcoin.cz',
-      ogImage: '/ogimage.jpg',
-      theme_color: '#f7931a',
-      viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui, viewport-fit=cover'
-    } */
   },
 
   telemetry: false,
