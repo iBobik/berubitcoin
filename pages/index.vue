@@ -36,7 +36,9 @@ definePageMeta({
 })
 
 
-const { data: placesCompressed } = useFetch('/api/places', { lazy: true })
+const placesCompressed = ref<Place[]>([])
+const fetchPromise = $fetch('/api/places').then(data => placesCompressed.value = data)
+if (process.server) await fetchPromise // Make sure in the SSR we have the data before rendering
 
 
 function parseDateOrUndefined(date: string | undefined): Date | undefined {
@@ -51,7 +53,7 @@ const placesAll = computed(() => {
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
   const oneYearAgoString = oneYearAgo.toISOString().substring(0, 10)
 
-  return placesCompressed.value?.map(place => ({
+  return placesCompressed.value.map(place => ({
     ...place,
     verified: parseDateOrUndefined(place.verified),
     verifiedIcon: !!(place.verified && place.verified > oneYearAgoString && place.accepts.ln),

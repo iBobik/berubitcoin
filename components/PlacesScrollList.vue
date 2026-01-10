@@ -8,7 +8,7 @@
     "
   >
     <li
-      v-for="item in items"
+      v-for="item in items.slice(0, itemsLimit)"
       :key="item.id"
       :data-item-id="item.id"
       :ref="el => el ? itemsRefs.set(item.id, el as HTMLElement) : itemsRefs.delete(item.id)"
@@ -16,6 +16,9 @@
       @click="$emit('update:selectedItemId', item.id)"
     >
       <slot :item="item" />
+    </li>
+    <li class="h-20 px-4 py-3 text-center bg-gray-700 border border-gray-200 hover:brightness-110 border-opacity-40" @click="itemsLimit += 50">
+      Zobrazit další →
     </li>
   </ul>
 </template>
@@ -33,6 +36,7 @@ const props = defineProps<{
 
 const containerRef = ref<HTMLElement>()
 const itemsRefs = ref<Map<number, HTMLElement>>(new Map())
+const itemsLimit = ref(50)
 
 watch(() => props.items, () => {
   // If the selected item is not in the list, select the first item
