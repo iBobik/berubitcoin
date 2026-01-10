@@ -16,7 +16,7 @@ export default defineCachedEventHandler(async () => {
     [out:json];
     node["currency:XBT"="yes"](${boundsStr});
     out body;
-  `)).json()
+  `, { endpoint: 'https://overpass.private.coffee/api/interpreter' })).json()
 
   return (data.elements as OverpassNode[]).map(place => {
     try {
