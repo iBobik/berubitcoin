@@ -1,0 +1,45 @@
+{
+	"name": "BeruBitcoin Dev",
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	"initializeCommand": "for id in $(docker ps -aq --filter 'status=removing'); do docker wait $id 2>/dev/null || true; done",
+	"postAttachCommand": "bash -c 'npm i && npm run dev'",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"esbenp.prettier-vscode",
+				"nuxt.mdc",
+				"oxc.oxc-vscode",
+				"sdras.vue-vscode-snippets",
+				"sst-dev.opencode",
+				"usernamehw.errorlens",
+				"vue.volar"
+			],
+			"settings": {
+				"launch": {
+					"version": "0.2.0",
+					"configurations": [
+						{
+							"type": "node-terminal",
+							"name": "Run dev server",
+							"request": "launch",
+							"command": "npm run dev",
+							"cwd": "${workspaceFolder}"
+						}
+					]
+				},
+				"editor.codeActionsOnSave": {
+					"source.fixAll.oxc": "explicit"
+				},
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"editor.formatOnSave": false,
+				"editor.quickSuggestions": {
+					"strings": "on"
+				}
+			}
+		}
+	}
+}

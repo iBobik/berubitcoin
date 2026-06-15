@@ -1,0 +1,114 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["opencode-pty"],
+  "model": "ppq/claude-opus-4.8",
+  "provider": {
+    "ppq": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "PayPerQ - ppq.ai",
+      "options": {
+        "baseURL": "https://api.ppq.ai",
+        "apiKey": "{env:PPQ_API_KEY}",
+        "includeUsage": true
+      },
+      "models": {
+        "auto": {
+          "name": "auto"
+        },
+        "gpt-5.2-codex": {
+          "name": "openai/gpt-5.2-codex"
+        },
+        "gpt-5.4-pro": {
+          "name": "openai/gpt-5.4-pro"
+        },
+        "gpt-5.5": {
+          "name": "openai/gpt-5.5"
+        },
+        "claude-sonnet-4.6": {
+          "name": "claude-sonnet-4.6"
+        },
+        "claude-opus-4.8": {
+          "name": "claude-opus-4.8"
+        },
+        "google/gemini-3.1-pro-preview": {
+          "name": "google/gemini-3.1-pro-preview"
+        },
+        "google/gemini-3.1-flash-lite-preview": {
+          "name": "google/gemini-3.1-flash-lite-preview"
+        },
+        "qwen/qwen3-coder-plus": {
+          "name": "qwen/qwen3-coder-plus"
+        },
+        "qwen/qwen3-coder-flash": {
+          "name": "qwen/qwen3-coder-flash"
+        },
+        "qwen/qwen3-max-thinking": {
+          "name": "qwen/qwen3-max-thinking"
+        },
+        "mistralai/codestral-2508": {
+          "name": "mistralai/codestral-2508"
+        },
+        "mistralai/devstral-2512": {
+          "name": "mistralai/devstral-2512"
+        },
+        "deepseek/deepseek-v3.2": {
+          "name": "deepseek/deepseek-v3.2"
+        },
+        "deepseek/deepseek-r1-0528": {
+          "name": "deepseek/deepseek-r1-0528"
+        },
+        "moonshotai/kimi-k2.7": {
+          "name": "moonshotai/kimi-k2.7"
+        },
+        "grok-4": {
+          "name": "grok-4"
+        },
+        "meta-llama/llama-4-maverick": {
+          "name": "meta-llama/llama-4-maverick"
+        }
+      }
+    }
+  },
+  "permission": {
+    "external_directory": {
+      "/home/node/.config/opencode/**": "allow",
+      "/usr/local/share/npm-global/lib/node_modules/**": "allow",
+      "/tmp/**": "allow"
+    }
+  },
+  "agent": {
+    "gsd-planner": {
+      "model": "ppq/claude-opus-4.8"
+    },
+    "gsd-plan-checker": {
+      "model": "ppq/claude-sonnet-4.6"
+    },
+    "gsd-phase-researcher": {
+      "model": "ppq/moonshotai/kimi-k2.7"
+    },
+    "gsd-roadmapper": {
+      "model": "ppq/claude-sonnet-4.6"
+    },
+    "gsd-project-researcher": {
+      "model": "ppq/moonshotai/kimi-k2.7"
+    },
+    "gsd-research-synthesizer": {
+      "model": "ppq/moonshotai/kimi-k2.7"
+    },
+    "gsd-codebase-mapper": {
+      "model": "ppq/moonshotai/kimi-k2.7"
+    },
+    "gsd-executor": {
+      "model": "opencode/big-pickle"
+    },
+    "gsd-debugger": {
+      "model": "ppq/claude-opus-4.8"
+    },
+    "gsd-verifier": {
+      "model": "ppq/claude-sonnet-4.6"
+    },
+    "gsd-integration-checker": {
+      "model": "ppq/claude-sonnet-4.6"
+    }
+  }
+}

@@ -18,6 +18,8 @@ logs
 .DS_Store
 .fleet
 .idea
+.planning
+.devcontainer/data
 
 # Local env files
 .env
