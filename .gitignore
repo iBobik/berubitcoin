@@ -7,6 +7,9 @@
 dist
 dist-build
 
+# NuxtHub local storage (KV/cache/db emulation)
+.data
+
 # Node dependencies
 node_modules
 

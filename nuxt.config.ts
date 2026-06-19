@@ -37,18 +37,21 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxthub/core',
     '@element-plus/nuxt',
     '@vite-pwa/nuxt',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
   ],
 
-  nitro: {
-    storage: {
-      cache: {
-        driver: 'cloudflare-kv-binding',
-      },
-    },
+  // NuxtHub configures the Cloudflare Workers (`cloudflare_module`) preset,
+  // auto-generates wrangler.json at build time, and provisions the bindings.
+  hub: {
+    // Key-Value storage (binding: `KV`) — useStorage('kv') / hubKV()
+    kv: true,
+    // Cached server-route / function responses (binding: `CACHE`).
+    // Replaces the previous manual nitro.storage `cloudflare-kv-binding`.
+    cache: true,
   },
 
   runtimeConfig: {
@@ -81,14 +84,12 @@ export default defineNuxtConfig({
         },
       },
     },
-    server: {
-      fs: {
-        allow: [
-          '/Users/Bobik/Applications/vue-mapbox-ts',
-        ],
-      },
-    },
   },
 
-  compatibilityDate: '2024-08-13',
+  // Opt in to Nuxt 4 defaults (data fetching, route metadata, etc.).
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  compatibilityDate: '2025-06-18',
 })

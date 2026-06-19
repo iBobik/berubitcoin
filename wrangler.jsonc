@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mapa-berubitcoin",
+  "compatibility_date": "2025-06-18",
+  // Required by Nuxt/Nitro server output running on Workers.
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Observability: Workers Logs + automatic request tracing.
+  // NuxtHub merges this block into the wrangler config it generates at build.
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      // 1 = log 100% of requests. Lower (e.g. 0.1) for high-traffic cost control.
+      "head_sampling_rate": 1,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": true,
+      // 1 = trace 100% of requests. Lower for high-traffic cost control.
+      "head_sampling_rate": 1
+    }
+  }
+
+  // KV (`KV`) and cache (`CACHE`) bindings are provisioned by NuxtHub from the
+  // `hub` config in nuxt.config.ts and injected into the generated
+  // .output/server/wrangler.json at build time. To pin specific namespace IDs
+  // for self-hosted deploys, declare them here, e.g.:
+  // "kv_namespaces": [
+  //   { "binding": "KV", "id": "<kv-namespace-id>" },
+  //   { "binding": "CACHE", "id": "<cache-namespace-id>" }
+  // ]
+}
