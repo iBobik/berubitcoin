@@ -38,7 +38,7 @@ definePageMeta({
 
 const placesCompressed = ref<Place[]>([])
 const fetchPromise = $fetch('/api/places').then(data => placesCompressed.value = data)
-if (process.server) await fetchPromise // Make sure in the SSR we have the data before rendering
+if (import.meta.server) await fetchPromise // Make sure in the SSR we have the data before rendering
 
 
 function parseDateOrUndefined(date: string | undefined): Date | undefined {

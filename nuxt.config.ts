@@ -54,6 +54,13 @@ export default defineNuxtConfig({
     cache: true,
   },
 
+  // Pin the modern Cloudflare Workers preset so `nuxt build` / `npm run deploy`
+  // always target Workers (otherwise a plain local build falls back to
+  // node-server). Override at build time with NITRO_PRESET if needed.
+  nitro: {
+    preset: process.env.NITRO_PRESET || 'cloudflare_module',
+  },
+
   runtimeConfig: {
     public: {
       mapBounds: [[12, 47.7], [23, 51.1]],
