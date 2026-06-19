@@ -47,18 +47,22 @@ export default defineNuxtConfig({
   // NuxtHub configures the Cloudflare Workers (`cloudflare_module`) preset,
   // auto-generates wrangler.json at build time, and provisions the bindings.
   hub: {
-    // Key-Value storage (binding: `KV`) — useStorage('kv') / hubKV()
-    kv: true,
     // Cached server-route / function responses (binding: `CACHE`).
-    // Replaces the previous manual nitro.storage `cloudflare-kv-binding`.
+    // On Cloudflare this is backed by a Workers KV namespace; locally NuxtHub
+    // emulates it on the filesystem (`.data`). Replaces the previous manual
+    // nitro.storage `cloudflare-kv-binding` cache driver.
     cache: true,
   },
 
-  // Pin the modern Cloudflare Workers preset so `nuxt build` / `npm run deploy`
-  // always target Workers (otherwise a plain local build falls back to
-  // node-server). Override at build time with NITRO_PRESET if needed.
-  nitro: {
-    preset: process.env.NITRO_PRESET || 'cloudflare_module',
+  // Target the modern Cloudflare Workers preset for production builds only.
+  // `nuxt dev` is left to NuxtHub's local emulation (filesystem-backed cache),
+  // otherwise the `cloudflare-kv-binding` driver runs in dev with no real
+  // CACHE binding and crashes on cache reads.
+  // Override at build time with NITRO_PRESET if needed.
+  $production: {
+    nitro: {
+      preset: process.env.NITRO_PRESET || 'cloudflare_module',
+    },
   },
 
   runtimeConfig: {
